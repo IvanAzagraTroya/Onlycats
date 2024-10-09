@@ -1,0 +1,28 @@
+{ // EJEMPLO, MODIFICAR CUANDO ESTÉN HECHOS LOS  WAYPOINTS
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/users/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/users/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/posts/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/posts/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    }
+  ]
+}
