@@ -1,0 +1,6 @@
+@Onlycats.SharedUtilities_HostAddress = http://localhost:5184
+
+GET {{Onlycats.SharedUtilities_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
