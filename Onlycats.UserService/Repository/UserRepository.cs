@@ -20,7 +20,7 @@ using OnlycatsTFG.models;
          }
 
          public async Task<User> Read(int id){
-             return await _dbSet.FirstOrDefault(u => u.UserId == id);
+             return await _dbSet.FirstOrDefault<User>(u => u.UserId == id);
          }
 
          public async void Update(int id) {
@@ -37,5 +37,10 @@ using OnlycatsTFG.models;
                  await _context.SaveChangesAsync();
              }
          }
-     }
+
+        Task IRepository<int, User>.Update(int id)
+        {
+            throw new NotImplementedException();
+        }
+    }
  }

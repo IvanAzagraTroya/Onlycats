@@ -1,4 +1,4 @@
-namespace OnlycatsTFG.utils{
+namespace Onlycats.SharedUtilities.utils{
     public class IdGenerator {
 
         private static IdGenerator? instance = null;

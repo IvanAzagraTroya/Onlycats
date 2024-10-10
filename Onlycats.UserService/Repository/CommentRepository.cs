@@ -37,5 +37,15 @@ using OnlycatsTFG.models;
                  await _context.SaveChangesAsync();
              }
          }
-     }
+
+        Task<Comment> IRepository<int, Comment>.Read(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IRepository<int, Comment>.Update(int id)
+        {
+            throw new NotImplementedException();
+        }
+    }
  }

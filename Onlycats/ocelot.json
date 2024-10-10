@@ -1,4 +1,4 @@
-{ // EJEMPLO, MODIFICAR CUANDO ESTÉN HECHOS LOS  WAYPOINTS
+{ // EJEMPLO, MODIFICAR CUANDO ESTï¿½N HECHOS LOS  WAYPOINTS
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/users/{everything}",
