@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onlycats", "Onlycats\Onlycats.csproj", "{233B0101-FF3A-4F19-9424-BDA58506673F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onlycats", "Onlycats\Onlycats.csproj", "{233B0101-FF3A-4F19-9424-BDA58506673F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onlycats.InteractionService", "Onlycats.InteractionService\Onlycats.InteractionService.csproj", "{C6EE5964-86E5-4620-BE91-323096FD4EFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onlycats.InteractionService", "Onlycats.InteractionService\Onlycats.InteractionService.csproj", "{C6EE5964-86E5-4620-BE91-323096FD4EFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onlycats.MessageService", "Onlycats.MessageService\Onlycats.MessageService.csproj", "{D744951D-B49A-4249-A847-BBF8E82D87EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onlycats.MessageService", "Onlycats.MessageService\Onlycats.MessageService.csproj", "{D744951D-B49A-4249-A847-BBF8E82D87EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onlycats.PostService", "Onlycats.PostService\Onlycats.PostService.csproj", "{7BA34AB3-3969-42DD-A66C-690881CF62A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onlycats.PostService", "Onlycats.PostService\Onlycats.PostService.csproj", "{7BA34AB3-3969-42DD-A66C-690881CF62A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onlycats.UserService", "Onlycats.UserService\Onlycats.UserService.csproj", "{E1B6D5F9-F3DB-42ED-B906-3097ACBF3D79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onlycats.UserService", "Onlycats.UserService\Onlycats.UserService.csproj", "{E1B6D5F9-F3DB-42ED-B906-3097ACBF3D79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onlycats.SharedUtilities", "Onlycats.SharedUtilities\Onlycats.SharedUtilities.csproj", "{9672359C-D205-48C9-97FF-93A1BC8185E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onlycats.SharedUtilities", "Onlycats.SharedUtilities\Onlycats.SharedUtilities.csproj", "{9672359C-D205-48C9-97FF-93A1BC8185E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth", "Auth\Auth.csproj", "{2F450432-9B8A-489F-910C-C082B2B81E85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{9672359C-D205-48C9-97FF-93A1BC8185E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9672359C-D205-48C9-97FF-93A1BC8185E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9672359C-D205-48C9-97FF-93A1BC8185E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F450432-9B8A-489F-910C-C082B2B81E85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F450432-9B8A-489F-910C-C082B2B81E85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F450432-9B8A-489F-910C-C082B2B81E85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F450432-9B8A-489F-910C-C082B2B81E85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
