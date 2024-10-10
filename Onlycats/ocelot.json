@@ -1,4 +1,7 @@
 { // EJEMPLO, MODIFICAR CUANDO EST�N HECHOS LOS  WAYPOINTS
+  "GlobalConfiguration": {
+    "BaseUrl":  "https://localhost:5003"
+  },
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/users/{everything}",
