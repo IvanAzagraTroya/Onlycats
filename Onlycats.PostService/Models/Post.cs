@@ -1,17 +1,18 @@
 
 using System.Text.Json.Serialization;
-using OnlycatsTFG.utils;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 
 namespace OnlycatsTFG
 {
     public class Post {
-        [JsonPropertyName("id")]
-        public int PostId {get; } = IdGenerator.GenerateId();
-        [JsonPropertyName("owner_id")]
-        public required string OwnerId {get; set;}
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string PostId { get; set; }
+        public required string UserId {get; set;}
         [JsonPropertyName("image_url")]
         public required string ImageUrl {get; set;}
-        public DateTime PostDate {get;} = DateTime.Now;
+        public string PostDate {get;} = DateTime.Now.ToString();
         [JsonPropertyName("likes")]
         public int LikeNumber {get; set;} = 0; //NoSQL para optimización
         [JsonPropertyName("dislikes")]

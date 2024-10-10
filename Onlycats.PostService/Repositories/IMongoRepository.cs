@@ -1,4 +1,5 @@
-namespace OnlycatsTFG.repository.mongorepository{
+﻿namespace OnlycatsTFG.PostService.Repositories
+{
     public interface IMongoRepository<T, Key> where T : class
     {
         Task CreateAsync(T entity);
