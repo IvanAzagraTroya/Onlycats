@@ -42,9 +42,9 @@ namespace OnlycatsTFG.InteractionService.MongoRepository
             await _collection.DeleteOneAsync(Builders<T>.Filter.Eq("_id", id));
         }
 
-        public async Task GetInteractionsByUserId(int userId)
+        public async Task<List<T>> GetInteractionsByUserId(int userId)
         {
-            await _collection.FindAsync(Builders<T>.Filter.Eq(i => i.UserId, userId));
+            return await _collection.Find(Builders<T>.Filter.Eq(i => i.UserId, userId)).ToListAsync();
         }
 
         public async Task<List<T>> GetPostInteractionsOrderedByDateAsync(int postId)
