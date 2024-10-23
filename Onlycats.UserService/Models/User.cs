@@ -1,10 +1,9 @@
 using System.Text.Json.Serialization;
-using Onlycats.SharedUtilities.utils;
 
 namespace OnlycatsTFG.models{
     public class User {
         [JsonPropertyName("id")]
-        public int UserId {get;} = IdGenerator.GenerateId();
+        public int UserId { get; set; }
         [JsonPropertyName("display_name")]
         public string DisplayName { get; set;}
         [JsonPropertyName("username")]
@@ -17,8 +16,7 @@ namespace OnlycatsTFG.models{
         public int FollowingNum {get; set;}
         [JsonPropertyName("number_posts")]
         public int PostNum {get; set;}
-        public string[]? PeopleFollowedId {get; set;} = null;
-
+        [JsonPropertyName("email")]
         public required string Email {get; set;}
         public required string Password {get; set;}
         public DateTime JoinedDate {get;} = DateTime.Now;

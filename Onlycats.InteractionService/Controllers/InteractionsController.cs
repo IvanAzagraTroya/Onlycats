@@ -1,25 +1,31 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OnlycatsTFG.PostService.Repositories;
+using OnlycatsTFG.repository.mongorepository;
 using OnlycatsTFG.models;
+using MongoDB.Bson;
 
 namespace Onlycats.InteractionService.Controllers
 {
     [ApiController]
-    [Route("interactions")]
+    [Route("api/[controller]")]
     public class InteractionsController : ControllerBase
     {
-        private readonly IMongoRepository<Activity, string> _mongoRepository;
+        private readonly IMongoRepository<Activity, ObjectId> _mongoRepository;
         private readonly ILogger<InteractionsController> _logger;
 
-        public InteractionsController(ILogger<InteractionsController> logger, IMongoRepository<Activity, string> mongoRepository)
+        public InteractionsController(ILogger<InteractionsController> logger, IMongoRepository<Activity, ObjectId> mongoRepository)
         {
             _logger = logger;
             _mongoRepository = mongoRepository;
         }
+        [HttpGet("interactions")]
+        public async Task<List<Activity>> ReadAll()
+        {
+            return await _mongoRepository.ReadAll();
+        }
 
-        [HttpGet("/{id}")]
-        public async Task<Activity> ReadInteractionByIdAsync(string id)
+        [HttpGet("interactions/{id}")]
+        public async Task<Activity> ReadInteractionByIdAsync(ObjectId id)
         {
             return await _mongoRepository.ReadByIdAsync(id);
         }
@@ -29,24 +35,36 @@ namespace Onlycats.InteractionService.Controllers
         {
             await _mongoRepository.CreateAsync(entity);
         }
-        [HttpPut("/update/{entity.ActivityId}")]
+        [HttpPut("/update/interactions/{entity.ActivityId}")]
         [Authorize]
 
         public async Task UpdateInteractionAsync(Activity entity)
         {
             await _mongoRepository.UpdateAsync(entity.ActivityId, entity);
         }
-        [HttpDelete("/delete/{id}")]
+        [HttpDelete("/delete/interacions/{id}")]
         [Authorize]
-        public async Task DeleteInteractionAsync(string id)
+        public async Task DeleteInteractionAsync(ObjectId id)
         {
             await _mongoRepository.DeleteAsync(id);
         }
 
-        [HttpGet("/user/{userId}")]
-        public async Task GetInteractionsByUserId(string userId)
+        [HttpGet("/user/interactions/{userId}")]
+        public async Task GetInteractionsByUserId(int userId)
         {
-            throw new NotImplementedException();
+            await _mongoRepository.GetInteractionsByUserId(userId);
+        }
+
+        [HttpGet("/date/interactions/{postId}")]
+        public async Task<List<Activity>> GetPostInteractionsOrderedByDateAsync(int postId)
+        {
+            return await _mongoRepository.GetPostInteractionsOrderedByDateAsync(postId);
+        }
+
+        [HttpGet("type/interactions/{type}")]
+        public async Task<List<Activity>> GetByActivityType(int type)
+        {
+            return await _mongoRepository.GetByInteractionType(type);
         }
     }
 }
