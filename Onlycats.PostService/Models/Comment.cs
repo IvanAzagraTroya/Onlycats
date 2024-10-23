@@ -1,7 +1,11 @@
-using OnlycatsTFG.utils;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
 namespace OnlycatsTFG.models{
     public class Comment {
-        public int CommentId {get;} = IdGenerator.GenerateId();
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public ObjectId CommentId { get; set; }
         public required string PostId {get; set;}
         public required string UserId {get; set;}
         public required string Content {get; set;}

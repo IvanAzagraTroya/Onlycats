@@ -1,13 +1,17 @@
-﻿using MongoDB.Driver;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using OnlycatsTFG.PostService.Repositories;
+using OnlycatsTFG.models;
+using MongoDB.Driver;
 
-namespace OnlycatsTFG.PostService.MongoRepository
+namespace OnlycatsTFG.PostService.Controllers
 {
-    public class PostMongoRepository<T, Key> : IMongoRepository<T, Key> where T : Post
+     public class CommentMongoRepository<T, Key> : IMongoRepository<T, Key> where T : Comment
     {
         private readonly IMongoCollection<T> _collection;
 
-        public PostMongoRepository(IMongoCollection<T> collection)
+        public CommentMongoRepository(IMongoCollection<T> collection)
         {
             _collection = collection;
         }
@@ -38,4 +42,4 @@ namespace OnlycatsTFG.PostService.MongoRepository
             await _collection.DeleteOneAsync(Builders<T>.Filter.Eq("_id", id));
         }
     }
-}
+ }
