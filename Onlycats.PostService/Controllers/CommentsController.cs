@@ -8,7 +8,7 @@ using OnlycatsTFG.PostService.Repositories;
 
 namespace Onlycats.CommentService.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class CommentsController : ControllerBase
     {
@@ -21,28 +21,34 @@ namespace Onlycats.CommentService.Controllers
             _mongoRepository = mongoRepository;
         }
 
-        [HttpGet("Comments")]
-        public async Task<List<Comment>> ReadAllComments()
+        [HttpGet("comments")]
+        public async Task<ActionResult<List<Comment>>> ReadAllComments()
         {
-            return await _mongoRepository.ReadAll();
+            var comments = await _mongoRepository.ReadAll();
+            if (comments.Count == 0) return NotFound();
+            return Ok(comments);
         }
 
-        [HttpGet("/Comments/{id}")]
-        public async Task<Comment> ReadCommentByIdAsync(ObjectId id)
+        [HttpGet("comments/{id}")]
+        public async Task<ActionResult<Comment>> ReadCommentByIdAsync(ObjectId id)
         {
-            return await _mongoRepository.ReadByIdAsync(id);
+            var comment = await _mongoRepository.ReadByIdAsync(id);
+            if (comment == null) return NotFound();
+            return Ok(comment);
         }
-        [HttpPost("/insert/Comments/{entity.CommentId}")]
+        [HttpPost("comments/insert/{entity.CommentId}")]
         [Authorize]
-        public async Task AddCommentAsync(Comment entity)
+        public async Task<ActionResult> AddCommentAsync(Comment entity)
         {
             await _mongoRepository.CreateAsync(entity);
+            return Created();
         }
-        [HttpDelete("/delete/Comments/{id}")]
+        [HttpDelete("comments/delete/{id}")]
         [Authorize]
-        public async Task DeleteCommentAsync(ObjectId id)
+        public async Task<ActionResult> DeleteCommentAsync(ObjectId id)
         {
             await _mongoRepository.DeleteAsync(id);
+            return NoContent();
         }
     }
 }

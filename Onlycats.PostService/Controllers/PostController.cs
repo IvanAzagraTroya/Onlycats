@@ -6,7 +6,7 @@ using OnlycatsTFG.PostService.Repositories;
 namespace OnlycatsTFG.PostService.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/")]
     public class PostsController : ControllerBase
     {
         private readonly IMongoRepository<Post, ObjectId> _mongoRepository;
@@ -19,33 +19,44 @@ namespace OnlycatsTFG.PostService.Controllers
         }
 
         [HttpGet("posts")]
-        public async Task<List<Post>> ReadAllPosts()
+        public async Task<ActionResult<List<Post>>> ReadAllPosts()
         {
-            return await _mongoRepository.ReadAll();
+            var posts = await _mongoRepository.ReadAll();
+            if (posts.Count == 0) { 
+                return NotFound();
+            }
+            return Ok(posts);
         }
 
-        [HttpGet("/posts/{id}")]
-        public async Task<Post> ReadPostByIdAsync(ObjectId id)
+        [HttpGet("posts/{id}")]
+        public async Task<ActionResult<Post>> ReadPostByIdAsync(ObjectId id)
         {
-            return await _mongoRepository.ReadByIdAsync(id);
+            var post = await _mongoRepository.ReadByIdAsync(id);
+            if (post == null) {
+                return NotFound();
+            }
+            return Ok(post);
         }
-        [HttpPost("/insert/posts/{entity.PostId}")]
+        [HttpPost("posts/insert/{entity.PostId}")]
         [Authorize]
-        public async Task AddPostAsync(Post entity)
+        public async Task<ActionResult> AddPostAsync(Post entity)
         {
             await _mongoRepository.CreateAsync(entity);
+            return Created();
         }
-        [HttpPut("/update/posts/{entity.PostId}")]
+        [HttpPut("posts/update/{entity.PostId}")]
         [Authorize]
-        public async Task UpdatePostAsync(Post entity)
+        public async Task<ActionResult> UpdatePostAsync(Post entity)
         {
             await _mongoRepository.UpdateAsync(entity.PostId, entity);
+            return NoContent();
         }
-        [HttpDelete("/delete/posts/{id}")]
+        [HttpDelete("posts/delete/{id}")]
         [Authorize]
-        public async Task DeletePostAsync(ObjectId id)
+        public async Task<ActionResult> DeletePostAsync(ObjectId id)
         {
             await _mongoRepository.DeleteAsync(id);
+            return NoContent();
         }
     }
 }

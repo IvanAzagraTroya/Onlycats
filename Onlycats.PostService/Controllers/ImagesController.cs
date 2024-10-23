@@ -7,7 +7,7 @@ using OnlycatsTFG.PostService.Repositories;
 namespace OnlycatsTFG.PostService.Controllers
 {
     [ApiController]
-    [Route("api/images/[controller]")]
+    [Route("api/")]
     public class ImagesController : ControllerBase
     {
         private readonly IMongoRepository<Image, ObjectId> _mongoRepository;
@@ -20,34 +20,40 @@ namespace OnlycatsTFG.PostService.Controllers
         }
 
         [HttpGet("images")]
-        public async Task<List<Image>> ReadAllImages()
+        public async Task<ActionResult<List<Image>>> ReadAllImages()
         {
-            return await _mongoRepository.ReadAll();
+            var images = await _mongoRepository.ReadAll();
+            if(images.Count == 0) return NotFound();
+            return Ok(images);
         }
 
-        [HttpGet("/image/{id}")]
-        public async Task<Image> ReadImageByIdAsync(ObjectId id)
+        [HttpGet("/images/{id}")]
+        public async Task<ActionResult<Image>> ReadImageByIdAsync(ObjectId id)
         {
-            return await _mongoRepository.ReadByIdAsync(id);
+            var image = await _mongoRepository.ReadByIdAsync(id);
+            if (image == null) return NotFound();
+            return Ok(image);
         }
-        [HttpPost("/insert_image/{entity.ImageId}")]
+        [HttpPost("images/insert/{entity.ImageId}")]
         [Authorize]
-        public async Task AddImageAsync(Image entity)
+        public async Task<ActionResult> AddImageAsync(Image entity)
         {
             await _mongoRepository.CreateAsync(entity);
+            return Created();
         }
-        [HttpPut("/update_image/{entity.ImageId}")]
+        [HttpPut("images/update/{entity.ImageId}")]
         [Authorize]
-
-        public async Task UpdateImageAsync(Image entity)
+        public async Task<ActionResult> UpdateImageAsync(Image entity)
         {
             await _mongoRepository.UpdateAsync(entity.Post_id, entity);
+            return NoContent();
         }
-        [HttpDelete("/delete_image/{id}")]
+        [HttpDelete("images/delete/{id}")]
         [Authorize]
-        public async Task DeleteImageAsync(ObjectId id)
+        public async Task<ActionResult> DeleteImageAsync(ObjectId id)
         {
             await _mongoRepository.DeleteAsync(id);
+            return NoContent();
         }
     }
 }

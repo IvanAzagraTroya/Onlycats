@@ -5,7 +5,7 @@ using OnlycatsTFG.repository;
 
 namespace Onlycats.UserService.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -26,20 +26,20 @@ namespace Onlycats.UserService.Controllers
             return Ok(users);
         }
 
-        [HttpPost("users/create_user")]
+        [HttpPost("users/create")]
         public async Task<IActionResult> AddUserAsync([FromBody] User user)
         {
             await _userRepository.AddAsync(user);
             return Created();
         }
 
-        [HttpPut("users/update_user")] 
+        [HttpPut("users/update")] 
         public async Task<IActionResult> UpdateUserAsync([FromBody] User user)
         {
             await _userRepository.UpdateAsync(user);
             return Ok(user);
         }
-        [HttpGet("users/user_id")]
+        [HttpGet("users/id")]
         public async Task<IActionResult> GetByIdAsync([FromBody] int id)
         {
             var user = await _userRepository.GetByIdAsync(id);
@@ -50,7 +50,7 @@ namespace Onlycats.UserService.Controllers
             return Ok(User);
         }
 
-        [HttpGet("users/user_email")]
+        [HttpGet("users/email")]
         public async Task<IActionResult> GetByEmailAsync([FromBody] string email)
         {
             var user = await _userRepository.GetByEmailAsync(email);

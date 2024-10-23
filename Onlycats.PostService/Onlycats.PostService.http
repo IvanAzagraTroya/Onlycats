@@ -1,6 +1,6 @@
 @Onlycats.PostService_HostAddress = http://localhost:5083
 
-GET {{Onlycats.PostService_HostAddress}}/weatherforecast/
+GET {{Onlycats.PostService_HostAddress}}/postservice/
 Accept: application/json
 
 ###

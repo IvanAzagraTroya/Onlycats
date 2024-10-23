@@ -7,7 +7,7 @@ using MongoDB.Bson;
 namespace Onlycats.InteractionService.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/")]
     public class InteractionsController : ControllerBase
     {
         private readonly IMongoRepository<Activity, ObjectId> _mongoRepository;
@@ -19,52 +19,65 @@ namespace Onlycats.InteractionService.Controllers
             _mongoRepository = mongoRepository;
         }
         [HttpGet("interactions")]
-        public async Task<List<Activity>> ReadAll()
+        public async Task<ActionResult<List<Activity>>> ReadAll()
         {
-            return await _mongoRepository.ReadAll();
+            var interactions = await _mongoRepository.ReadAll();
+            if(interactions.Count == 0) return NotFound();
+            return Ok(interactions);
         }
 
         [HttpGet("interactions/{id}")]
-        public async Task<Activity> ReadInteractionByIdAsync(ObjectId id)
+        public async Task<ActionResult<Activity>> ReadInteractionByIdAsync(ObjectId id)
         {
-            return await _mongoRepository.ReadByIdAsync(id);
+            var interaction = await _mongoRepository.ReadByIdAsync(id);
+            if(interaction == null) return NotFound();
+            return Ok(interaction);
         }
-        [HttpPost("/insert/{entity.ActivityId}")]
+        [HttpPost("interactions/insert/{entity.ActivityId}")]
         [Authorize]
-        public async Task AddInteractionAsync(Activity entity)
+        public async Task<ActionResult> AddInteractionAsync(Activity entity)
         {
             await _mongoRepository.CreateAsync(entity);
+            return Created();
         }
-        [HttpPut("/update/interactions/{entity.ActivityId}")]
+        [HttpPut("/interactions/update/{entity.ActivityId}")]
         [Authorize]
 
-        public async Task UpdateInteractionAsync(Activity entity)
+        public async Task<ActionResult> UpdateInteractionAsync(Activity entity)
         {
             await _mongoRepository.UpdateAsync(entity.ActivityId, entity);
+            return NoContent();
         }
-        [HttpDelete("/delete/interacions/{id}")]
+        [HttpDelete("interacions/delete/{id}")]
         [Authorize]
-        public async Task DeleteInteractionAsync(ObjectId id)
+        public async Task<ActionResult> DeleteInteractionAsync(ObjectId id)
         {
             await _mongoRepository.DeleteAsync(id);
+            return NoContent();
         }
 
-        [HttpGet("/user/interactions/{userId}")]
-        public async Task GetInteractionsByUserId(int userId)
+        [HttpGet("interactions/user/{userId}")]
+        public async Task<ActionResult<List<Activity>>> GetInteractionsByUserId(int userId)
         {
-            await _mongoRepository.GetInteractionsByUserId(userId);
+            var interactions = await _mongoRepository.GetInteractionsByUserId(userId);
+            if (interactions.Count == 0) return NotFound();
+            return Ok(interactions);
         }
 
-        [HttpGet("/date/interactions/{postId}")]
-        public async Task<List<Activity>> GetPostInteractionsOrderedByDateAsync(int postId)
+        [HttpGet("interactions/date/{postId}")]
+        public async Task<ActionResult<List<Activity>>> GetPostInteractionsOrderedByDateAsync(int postId)
         {
-            return await _mongoRepository.GetPostInteractionsOrderedByDateAsync(postId);
+            var activities = await _mongoRepository.GetPostInteractionsOrderedByDateAsync(postId);
+            if (activities.Count == 0) return NotFound();
+            return Ok(activities);
         }
 
-        [HttpGet("type/interactions/{type}")]
-        public async Task<List<Activity>> GetByActivityType(int type)
+        [HttpGet("interactions/type/{type}")]
+        public async Task<ActionResult<List<Activity>>> GetByActivityType(int type)
         {
-            return await _mongoRepository.GetByInteractionType(type);
+            var activities = await _mongoRepository.GetByInteractionType(type);
+            if (activities.Count == 0) return NotFound();
+            return Ok(activities);
         }
     }
 }
