@@ -14,8 +14,9 @@
 **/azds.yaml
 **/bin
 **/charts
-**/docker-compose*
-**/Dockerfile*
+# No excluyas el docker-compose y Dockerfile
+# **/docker-compose*
+# **/Dockerfile*
 **/node_modules
 **/npm-debug.log
 **/obj
@@ -28,3 +29,10 @@ README.md
 !.git/config
 !.git/packed-refs
 !.git/refs/heads/**
+
+# Excluye todos los Dockerfile menos los que están en las carpetas de servicios
+**/Dockerfile*
+!Onlycats.PostService/Dockerfile
+!Onlycats.InteractionService/Dockerfile
+!Onlycats.UserService/Dockerfile
+!Onlycats/Dockerfile

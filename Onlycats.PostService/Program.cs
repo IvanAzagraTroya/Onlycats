@@ -21,7 +21,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // for testing the service without gateaway
-var Config = builder.Configuration.AddJsonFile("appsettings.json").Build();
+var Config = builder.Configuration.AddJsonFile("Onlycats.PostService.appsettings.json").Build();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>
 {
@@ -36,6 +36,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config["Jwt:Key"]))
     };
 });
+
+//string mongoConnectionString = File.ReadAllText("/run/secrets/mongodb_connection_string");
+//builder.Configuration["ConnectionStrings:MongoDB"] = mongoConnectionString;
 
 var connectionString = builder.Configuration.GetConnectionString("mongoconnection");
 var client = new MongoClient(connectionString);
