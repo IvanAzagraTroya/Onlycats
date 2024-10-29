@@ -19,6 +19,6 @@ namespace OnlycatsTFG.models{
         [JsonPropertyName("email")]
         public required string Email {get; set;}
         public required string Password {get; set;}
-        public DateTime JoinedDate {get;} = DateTime.Now;
+        public string JoinedDate { get; } = DateTime.Now.ToString();
     }
 }

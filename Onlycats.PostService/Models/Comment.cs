@@ -9,7 +9,7 @@ namespace OnlycatsTFG.models{
         public required string PostId {get; set;}
         public required string UserId {get; set;}
         public required string Content {get; set;}
-        public DateTime CommentDate {get;} = DateTime.Now;
+        public string CommentDate {get;} = DateTime.Now.ToString();
         public int Likes {get; set;} = 0;
         public int Dislikes {get; set;} = 0;
     }

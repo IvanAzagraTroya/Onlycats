@@ -16,7 +16,7 @@ namespace Onlycats.UserService.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpGet("users/all")]
+        [HttpGet("users")]
         public async Task<IActionResult> GetAllUsersAsync()
         {
             var users = await _userRepository.GetAllAsync();

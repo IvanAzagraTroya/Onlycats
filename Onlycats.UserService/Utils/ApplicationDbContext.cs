@@ -12,7 +12,43 @@ namespace Onlycats.UserService.Utils
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //faltan cosas
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(e => e.UserId);
+
+                entity.Property(e => e.DisplayName)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.UserName)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.ProfilePicture)
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.FollowerNum)
+                    .HasDefaultValue(0);
+
+                entity.Property(e => e.FollowingNum)
+                    .HasDefaultValue(0);
+
+                entity.Property(e => e.PostNum)
+                    .HasDefaultValue(0);
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.HasIndex(e => e.Email)
+                    .IsUnique();
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.JoinedDate);
+            });
         }
     }
 }

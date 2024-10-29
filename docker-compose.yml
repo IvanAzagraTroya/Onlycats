@@ -1,51 +1,50 @@
 services:
-  onlycats-postservice:
+  postservice:
     build:
       context: .
       dockerfile: Onlycats.PostService/Dockerfile
     ports:
-      - "8080:80"
+      - "8083:8080"
     networks:
       - onlycats-network
-    secrets: 
-      - mongodb_connection_string
+    # secrets: 
+    #   - mongodb_connection_string
     volumes:
       - ./Onlycats.PostService:/src/Onlycats.PostService
-  onlycats-interactionservice:
+  interactionservice:
      build:
        context: .
        dockerfile: Onlycats.InteractionService/Dockerfile
      ports:
-       - "8081:81"
+       - "8081:8080"
      networks:
        - onlycats-network
      environment:
        - ASPNETCORE_ENVIRONMENT=Development
-     secrets: 
-       - mongodb_connection_string
+    #  secrets: 
+    #    - mongodb_connection_string
      volumes:
       - ./Onlycats.InteractionService:/src/Onlycats.InteractionService
-
-  onlycats-userservice:
+  userservice:
      build:
        context: .
        dockerfile: Onlycats.UserService/Dockerfile
      ports:
-       - "8082:82"
+       - "8082:8080"
      networks:
        - onlycats-network
      environment:
        - ASPNETCORE_ENVIRONMENT=Development
-     secrets:
-       - postgres_connection_string
+    #  secrets:
+    #    - postgres_connection_string
      volumes:
        - ./Onlycats.UserService:/src/Onlycats.UserService
-  onlycats:
+  gateway:
      build:
-       context: ./Onlycats/Onlycats
+       context: ./Gateway
        dockerfile: Dockerfile
      ports:
-       - "8000:8000"
+       - "8000:8080"
      networks:
        - onlycats-network
      environment:
@@ -53,14 +52,15 @@ services:
      volumes:
        - ./Onlycats:/src/Onlycats
      depends_on:
-       - onlycats-postservice
-       - onlycats-interactionservice
-       - onlycats-userservice
+       - postservice
+       - interactionservice
+       - userservice
 networks:
   onlycats-network:
     driver: bridge
-secrets:
-  mongodb_connection_string:
-    external: true
-  postgres_connection_string:
-    external: true
+    attachable: true
+# secrets:
+#   mongodb_connection_string:
+#     external: true
+#   postgres_connection_string:
+#     external: true
