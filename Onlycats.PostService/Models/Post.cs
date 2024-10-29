@@ -12,7 +12,7 @@ namespace OnlycatsTFG
         public required int UserId {get; set;}
         [JsonPropertyName("image_url")]
         public required string ImageUrl {get; set;}
-        public string PostDate { get; set; } = DateTime.Now.ToString();
+        public string PostDate { get; } = DateTime.Now.ToString();
         public int LikeNumber {get; set;} = 0;
     }
 }

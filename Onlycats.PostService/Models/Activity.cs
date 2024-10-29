@@ -9,7 +9,7 @@ namespace OnlycatsTFG.models{
         public required int PostId { get; set;}
         public required int UserId {get; set;}
         public ActivityType ActionType {get; set;}
-        public DateTime ActivityDate {get;} = DateTime.Now;
+        public string ActivityDate {get;} = DateTime.Now.ToString();
     }
 
     public enum ActivityType{

@@ -1,6 +1,6 @@
-@Onlycats.InteractionService_HostAddress = http://localhost:5146
+@Onlycats.InteractionService_HostAddress = http://localhost:8081
 
-GET {{Onlycats.InteractionService_HostAddress}}/interactionservice/
+GET {{Onlycats.InteractionService_HostAddress}}/api/interactions
 Accept: application/json
 
 ###

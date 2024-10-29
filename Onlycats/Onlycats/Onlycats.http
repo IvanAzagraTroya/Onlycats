@@ -1,6 +1,6 @@
-@Onlycats_HostAddress = http://localhost:5086
+@Onlycats_HostAddress = http://localhost:5000
 
-GET {{Onlycats_HostAddress}}/weatherforecast/
+GET {{Onlycats_HostAddress}}/health
 Accept: application/json
 
 ###

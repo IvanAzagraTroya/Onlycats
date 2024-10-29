@@ -34,7 +34,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 //string mongoConnectionString = File.ReadAllText("/run/secrets/mongodb_connection_string");
 //builder.Configuration["ConnectionStrings:MongoDB"] = mongoConnectionString;
-
 var connectionString = builder.Configuration.GetConnectionString("mongoconnection");
 var client = new MongoClient(connectionString);
 

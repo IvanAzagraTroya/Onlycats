@@ -39,7 +39,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 //string mongoConnectionString = File.ReadAllText("/run/secrets/mongodb_connection_string");
 //builder.Configuration["ConnectionStrings:MongoDB"] = mongoConnectionString;
-
 var connectionString = builder.Configuration.GetConnectionString("mongoconnection");
 var client = new MongoClient(connectionString);
 
@@ -71,13 +70,6 @@ builder.Services.AddScoped<IMongoRepository<Comment, ObjectId>>(
     );
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
 app.UseHttpsRedirection();
 

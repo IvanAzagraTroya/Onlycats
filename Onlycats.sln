@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onlycats.PostService", "Onl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onlycats.UserService", "Onlycats.UserService\Onlycats.UserService.csproj", "{E1B6D5F9-F3DB-42ED-B906-3097ACBF3D79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onlycats", "Onlycats\Onlycats\Onlycats.csproj", "{F1C3B8F0-D87E-46B8-BF05-87E412101A2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gateway", "Gateway\Gateway.csproj", "{155B4EE6-CD57-42E4-A8EB-7D9F10E475D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{E1B6D5F9-F3DB-42ED-B906-3097ACBF3D79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1B6D5F9-F3DB-42ED-B906-3097ACBF3D79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1B6D5F9-F3DB-42ED-B906-3097ACBF3D79}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F1C3B8F0-D87E-46B8-BF05-87E412101A2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1C3B8F0-D87E-46B8-BF05-87E412101A2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1C3B8F0-D87E-46B8-BF05-87E412101A2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1C3B8F0-D87E-46B8-BF05-87E412101A2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{155B4EE6-CD57-42E4-A8EB-7D9F10E475D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{155B4EE6-CD57-42E4-A8EB-7D9F10E475D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{155B4EE6-CD57-42E4-A8EB-7D9F10E475D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{155B4EE6-CD57-42E4-A8EB-7D9F10E475D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
