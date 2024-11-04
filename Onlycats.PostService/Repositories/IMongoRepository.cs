@@ -7,5 +7,7 @@
         Task<T> ReadByIdAsync(Key id);
         Task UpdateAsync(Key id, T entity);
         Task DeleteAsync(Key id);
+        Task<List<T>> GetByOtherIdAsync(Key id);
+        Task<List<T>> GetByOtherIdAsync(int id);
     }
 }

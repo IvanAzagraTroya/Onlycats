@@ -25,6 +25,19 @@ services:
     #    - mongodb_connection_string
      volumes:
       - ./Onlycats.InteractionService:/src/Onlycats.InteractionService
+    
+  postgresdb:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: onlycats
+    ports:
+      - "5432:5432"
+    networks:
+      - onlycats-network
+    volumes:
+      - pgdata:/var/lib/postgresql/data
   userservice:
      build:
        context: .
@@ -35,6 +48,15 @@ services:
        - onlycats-network
      environment:
        - ASPNETCORE_ENVIRONMENT=Development
+       - POSTGRES_HOST=onlycats-postgresdb-1
+       - POSTGRES_PORT=5432
+       - POSTGRES_DB=onlycats
+       - POSTGRES_USER=postgres
+       - POSTGRES_PASSWORD=1234
+     depends_on:
+       - postgresdb
+     command: >
+       sh -c "dotnet ef migrations add InitialCreate; dotnet ef database update --no-build; dotnet Onlycats.UserService.dll"
     #  secrets:
     #    - postgres_connection_string
      volumes:
@@ -59,6 +81,8 @@ networks:
   onlycats-network:
     driver: bridge
     attachable: true
+volumes:
+ pgdata:
 # secrets:
 #   mongodb_connection_string:
 #     external: true

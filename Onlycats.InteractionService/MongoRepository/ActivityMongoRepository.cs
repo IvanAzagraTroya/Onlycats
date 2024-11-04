@@ -1,8 +1,6 @@
 ﻿using MongoDB.Driver;
 using OnlycatsTFG.repository.mongorepository;
 using OnlycatsTFG.models;
-using Microsoft.VisualBasic;
-using MongoDB.Bson;
 
 namespace OnlycatsTFG.InteractionService.MongoRepository
 {
@@ -44,14 +42,14 @@ namespace OnlycatsTFG.InteractionService.MongoRepository
 
         public async Task<List<T>> GetInteractionsByUserId(int userId)
         {
-            return await _collection.Find(Builders<T>.Filter.Eq(i => i.UserId, userId)).ToListAsync();
+            return await _collection.Find(Builders<T>.Filter.Eq("UserId", userId)).ToListAsync();
         }
 
         public async Task<List<T>> GetPostInteractionsOrderedByDateAsync(int postId)
         {
             var sort = Builders<T>.Sort.Descending(i => i.ActivityDate);
 
-            return await _collection.Find(Builders<T>.Filter.Eq(i => i.PostId, postId))
+            return await _collection.Find(Builders<T>.Filter.Eq("PostId", postId))
             .Sort(sort)
             .ToListAsync();
         }
@@ -69,6 +67,11 @@ namespace OnlycatsTFG.InteractionService.MongoRepository
                 _ => ActivityType.NoActivity,
             };
             return await _collection.Find(Builders<T>.Filter.Eq(i => i.ActionType, _type)).ToListAsync();
+        }
+
+        public async Task<List<T>> GetByOtherIdAsync(Key id)
+        {
+            return await _collection.Find(Builders<T>.Filter.Eq("PostId", id)).ToListAsync();
         }
     }
 }

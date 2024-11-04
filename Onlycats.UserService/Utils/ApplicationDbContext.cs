@@ -17,11 +17,9 @@ namespace Onlycats.UserService.Utils
                 entity.HasKey(e => e.UserId);
 
                 entity.Property(e => e.DisplayName)
-                    .IsRequired()
                     .HasMaxLength(255);
 
                 entity.Property(e => e.UserName)
-                    .IsRequired()
                     .HasMaxLength(255);
 
                 entity.Property(e => e.ProfilePicture)

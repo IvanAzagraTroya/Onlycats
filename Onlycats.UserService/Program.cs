@@ -33,6 +33,9 @@ builder.Services.AddScoped(typeof(IRepository<int, User>), typeof(UserRepository
 
 var app = builder.Build();
 
+//var context = app.Services.GetRequiredService<ApplicationDbContext>();
+//context.Database.Migrate();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

@@ -29,6 +29,7 @@ namespace OnlycatsTFG.PostService.Controllers
         }
 
         [HttpGet("posts/{id}")]
+        [Authorize]
         public async Task<ActionResult<Post>> ReadPostByIdAsync(ObjectId id)
         {
             var post = await _mongoRepository.ReadByIdAsync(id);
@@ -57,6 +58,14 @@ namespace OnlycatsTFG.PostService.Controllers
         {
             await _mongoRepository.DeleteAsync(id);
             return NoContent();
+        }
+        [HttpGet("posts/user/{id}")]
+        [Authorize]
+        public async Task<ActionResult> GetPostByUserIdAsync(int id)
+        {
+            var posts = await _mongoRepository.GetByOtherIdAsync(id);
+            if(posts.Count() == 0) return NoContent();
+            return Ok(posts);
         }
     }
 }

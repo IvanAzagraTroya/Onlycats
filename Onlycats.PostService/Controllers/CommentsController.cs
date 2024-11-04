@@ -48,5 +48,13 @@ namespace OnlycatsTFG.PostService.Controllers
             await _mongoRepository.DeleteAsync(id);
             return NoContent();
         }
+        [HttpGet("comments/post/{id}")]
+        [Authorize]
+        public async Task<ActionResult<List<Comment>>> GetCommentByPostIdAsync(ObjectId id)
+        {
+            var comments = await _mongoRepository.GetByOtherIdAsync(id);
+            if (comments.Count() == 0) return NoContent();
+            return Ok(comments);
+        }
     }
 }

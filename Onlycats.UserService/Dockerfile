@@ -11,6 +11,7 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Onlycats.UserService/Onlycats.UserService.csproj", "Onlycats.UserService/"]
 RUN dotnet restore "Onlycats.UserService/Onlycats.UserService.csproj"
+RUN dotnet tool install --global dotnet-ef
 COPY . .
 WORKDIR "/src/Onlycats.UserService"
 RUN dotnet build "Onlycats.UserService.csproj" -c $BUILD_CONFIGURATION -o /app/build
@@ -22,4 +23,5 @@ RUN dotnet publish "Onlycats.UserService.csproj" -c $BUILD_CONFIGURATION -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+ENV PATH="$PATH:/root/.dotnet/tools"
 ENTRYPOINT ["dotnet", "Onlycats.UserService.dll"]
