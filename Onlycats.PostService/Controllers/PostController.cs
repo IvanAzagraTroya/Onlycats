@@ -30,33 +30,36 @@ namespace OnlycatsTFG.PostService.Controllers
 
         [HttpGet("posts/{id}")]
         [Authorize]
-        public async Task<ActionResult<Post>> ReadPostByIdAsync(ObjectId id)
+        public async Task<ActionResult<Post>> ReadPostByIdAsync(string id)
         {
-            var post = await _mongoRepository.ReadByIdAsync(id);
+            var postId = new ObjectId(id);
+            var post = await _mongoRepository.ReadByIdAsync(postId);
             if (post == null) {
                 return NotFound();
             }
             return Ok(post);
         }
-        [HttpPost("posts/insert/{entity.PostId}")]
+        [HttpPost("posts/insert")]
         [Authorize]
         public async Task<ActionResult> AddPostAsync(Post entity)
         {
             await _mongoRepository.CreateAsync(entity);
             return Created();
         }
-        [HttpPut("posts/update/{entity.PostId}")]
+        [HttpPut("posts/update/{entity.Id}")]
         [Authorize]
         public async Task<ActionResult> UpdatePostAsync(Post entity)
         {
-            await _mongoRepository.UpdateAsync(entity.PostId, entity);
+            var postId = new ObjectId(entity.Id);
+            await _mongoRepository.UpdateAsync(postId, entity);
             return NoContent();
         }
         [HttpDelete("posts/delete/{id}")]
         [Authorize]
-        public async Task<ActionResult> DeletePostAsync(ObjectId id)
+        public async Task<ActionResult> DeletePostAsync(string id)
         {
-            await _mongoRepository.DeleteAsync(id);
+            var postId = new ObjectId(id);
+            await _mongoRepository.DeleteAsync(postId);
             return NoContent();
         }
         [HttpGet("posts/user/{id}")]

@@ -28,13 +28,14 @@ namespace OnlycatsTFG.PostService.Controllers
         }
 
         [HttpGet("comments/{id}")]
-        public async Task<ActionResult<Comment>> ReadCommentByIdAsync(ObjectId id)
+        public async Task<ActionResult<Comment>> ReadCommentByIdAsync(string id)
         {
-            var comment = await _mongoRepository.ReadByIdAsync(id);
+            var commentId = new ObjectId(id);
+            var comment = await _mongoRepository.ReadByIdAsync(commentId);
             if (comment == null) return NotFound();
             return Ok(comment);
         }
-        [HttpPost("comments/insert/{entity.CommentId}")]
+        [HttpPost("comments/insert/{entity.Id}")]
         [Authorize]
         public async Task<ActionResult> AddCommentAsync(Comment entity)
         {
@@ -43,16 +44,18 @@ namespace OnlycatsTFG.PostService.Controllers
         }
         [HttpDelete("comments/delete/{id}")]
         [Authorize]
-        public async Task<ActionResult> DeleteCommentAsync(ObjectId id)
+        public async Task<ActionResult> DeleteCommentAsync(string id)
         {
-            await _mongoRepository.DeleteAsync(id);
+            var commentId = new ObjectId(id);
+            await _mongoRepository.DeleteAsync(commentId);
             return NoContent();
         }
         [HttpGet("comments/post/{id}")]
         [Authorize]
-        public async Task<ActionResult<List<Comment>>> GetCommentByPostIdAsync(ObjectId id)
+        public async Task<ActionResult<List<Comment>>> GetCommentByPostIdAsync(string id)
         {
-            var comments = await _mongoRepository.GetByOtherIdAsync(id);
+            var postId = new ObjectId(id);
+            var comments = await _mongoRepository.GetByOtherIdAsync(postId);
             if (comments.Count() == 0) return NoContent();
             return Ok(comments);
         }

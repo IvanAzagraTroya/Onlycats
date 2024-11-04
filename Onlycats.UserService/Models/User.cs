@@ -6,8 +6,10 @@ namespace OnlycatsTFG.models
     public class User
     {
         public int UserId { get; set; }
-        public required string DisplayName { get; set; }
-        public required string UserName { get; set; }
+        [Required]
+        public string DisplayName { get; set; }
+        [Required]
+        public string UserName { get; set; }
         public string? ProfilePicture { get; set; }
         public int FollowerNum { get; set; } = 0;
         public int FollowingNum { get; set; } = 0;
@@ -18,5 +20,12 @@ namespace OnlycatsTFG.models
         public string Password { get; set; }
         public string JoinedDate { get; } = DateTime.Now.ToString();
 
+        public User(string displayName, string userName, string email, string password) 
+        { 
+            DisplayName = displayName; 
+            UserName = userName; 
+            Email = email; 
+            Password = password; 
+        }
     }
 }

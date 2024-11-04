@@ -22,7 +22,8 @@ namespace OnlycatsTFG.PostService.Controllers
         }
         public async Task<T> ReadByIdAsync(Key id)
         {
-            return await (Task<T>)_collection.Find(Builders<T>.Filter.Eq("_id", id)); //_collection.AsQueryable().Where(x => x.PostId == id).FirstOrDefault();
+            return await _collection.Find(Builders<T>.Filter.Eq("_id", id)).FirstOrDefaultAsync();
+            //return await (Task<T>)_collection.Find(Builders<T>.Filter.Eq("_id", id)); //_collection.AsQueryable().Where(x => x.PostId == id).FirstOrDefault();
         }
 
         public async Task CreateAsync(T entity)

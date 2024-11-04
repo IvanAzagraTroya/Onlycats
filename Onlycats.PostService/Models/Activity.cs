@@ -5,11 +5,11 @@ namespace OnlycatsTFG.models{
     public class Activity {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public ObjectId ActivityId {get; set;}
-        public required int PostId { get; set;} //Cambiar esto una vez ya haya posts con ObjectId real y borrar los que usan id's int de prueba creados de forma manual
+        public string Id {get; set;}
+        public required int PostId { get; set;} //Cambiar esto a string una vez ya haya posts con ObjectId real y borrar los que usan id's int de prueba creados de forma manual
         public required int UserId {get; set;}
         public ActivityType ActionType {get; set;}
-        public string ActivityDate {get;} = DateTime.Now.ToString();
+        public string ActivityDate { get; set; } = DateTime.Now.ToString();
     }
 
     public enum ActivityType{

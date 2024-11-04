@@ -1,11 +1,14 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Onlycats.PostService.Models
 {
     public class Image
     {
-        public ObjectId Id { get; set; }
-        public ObjectId Post_id { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+        public required string PostId { get; set; }
         public int UserId { get; set; }
         public required string Content { get; set; }
     }
