@@ -54,7 +54,7 @@ namespace Onlycats.UserService.Controllers
         }
 
         [HttpGet("users/email")]
-        public async Task<IActionResult> GetByEmailAsync([FromBody] string email)
+        public async Task<IActionResult> GetByEmailAsync([FromQuery] string email)
         {
             var user = await _userRepository.GetByEmailAsync(email);
             if(user == null)

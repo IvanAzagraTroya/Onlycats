@@ -34,26 +34,28 @@ namespace Onlycats.InteractionService.Controllers
             if(interaction == null) return NotFound();
             return Ok(interaction);
         }
-        [HttpPost("interactions/insert/{entity.ActivityId}")]
+        [HttpPost("interactions/insert")]
         [Authorize]
-        public async Task<ActionResult> AddInteractionAsync(Activity entity)
+        public async Task<ActionResult> AddInteractionAsync([FromBody]Activity entity)
         {
             await _mongoRepository.CreateAsync(entity);
             return Created();
         }
-        [HttpPut("/interactions/update/{entity.ActivityId}")]
+        [HttpPut("/interactions/update/{entity.Id}")]
         [Authorize]
 
-        public async Task<ActionResult> UpdateInteractionAsync(Activity entity)
+        public async Task<ActionResult> UpdateInteractionAsync([FromBody]Activity entity)
         {
-            await _mongoRepository.UpdateAsync(entity.ActivityId, entity);
+            var interactionId = new ObjectId(entity.Id);
+            await _mongoRepository.UpdateAsync(interactionId, entity);
             return NoContent();
         }
         [HttpDelete("interacions/delete/{id}")]
         [Authorize]
-        public async Task<ActionResult> DeleteInteractionAsync(ObjectId id)
+        public async Task<ActionResult> DeleteInteractionAsyncs(string id)
         {
-            await _mongoRepository.DeleteAsync(id);
+            var interactionId = new ObjectId(id);
+            await _mongoRepository.DeleteAsync(interactionId);
             return NoContent();
         }
 

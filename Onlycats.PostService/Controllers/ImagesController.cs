@@ -45,7 +45,8 @@ namespace OnlycatsTFG.PostService.Controllers
         [Authorize]
         public async Task<ActionResult> UpdateImageAsync(Image entity)
         {
-            await _mongoRepository.UpdateAsync(entity.Post_id, entity);
+            var imageId = new ObjectId(entity.PostId);
+            await _mongoRepository.UpdateAsync(imageId, entity);
             return NoContent();
         }
         [HttpDelete("images/delete/{id}")]
