@@ -6,8 +6,8 @@ namespace OnlycatsTFG.models{
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public ObjectId CommentId { get; set; }
-        public required string PostId {get; set;}
-        public required string UserId {get; set;}
+        public required ObjectId PostId {get; set;}
+        public required int UserId {get; set;}
         public required string Content {get; set;}
         public string CommentDate {get;} = DateTime.Now.ToString();
         public int Likes {get; set;} = 0;

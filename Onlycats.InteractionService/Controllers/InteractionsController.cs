@@ -19,6 +19,7 @@ namespace Onlycats.InteractionService.Controllers
             _mongoRepository = mongoRepository;
         }
         [HttpGet("interactions")]
+        [Authorize]
         public async Task<ActionResult<List<Activity>>> ReadAll()
         {
             var interactions = await _mongoRepository.ReadAll();
@@ -57,6 +58,7 @@ namespace Onlycats.InteractionService.Controllers
         }
 
         [HttpGet("interactions/user/{userId}")]
+        [Authorize]
         public async Task<ActionResult<List<Activity>>> GetInteractionsByUserId(int userId)
         {
             var interactions = await _mongoRepository.GetInteractionsByUserId(userId);
@@ -65,6 +67,7 @@ namespace Onlycats.InteractionService.Controllers
         }
 
         [HttpGet("interactions/date/{postId}")]
+        [Authorize]
         public async Task<ActionResult<List<Activity>>> GetPostInteractionsOrderedByDateAsync(int postId)
         {
             var activities = await _mongoRepository.GetPostInteractionsOrderedByDateAsync(postId);
@@ -73,10 +76,20 @@ namespace Onlycats.InteractionService.Controllers
         }
 
         [HttpGet("interactions/type/{type}")]
+        [Authorize]
         public async Task<ActionResult<List<Activity>>> GetByActivityType(int type)
         {
             var activities = await _mongoRepository.GetByInteractionType(type);
             if (activities.Count == 0) return NotFound();
+            return Ok(activities);
+        }
+
+        [HttpGet("interactions/post/{id}")]
+        [Authorize]
+        public async Task<ActionResult<List<Activity>>> GetByPostIdAsync(ObjectId postId)
+        {
+            var activities = await _mongoRepository.GetByOtherIdAsync(postId);
+            if (activities.Count() == 0) return NoContent();
             return Ok(activities);
         }
     }

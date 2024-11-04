@@ -25,34 +25,29 @@ namespace Onlycats.UserService.Migrations
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Relational:JsonPropertyName", "id");
+                        .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserId"));
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
-                        .HasAnnotation("Relational:JsonPropertyName", "display_name");
+                        .HasColumnType("character varying(255)");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
-                        .HasAnnotation("Relational:JsonPropertyName", "email");
+                        .HasColumnType("character varying(255)");
 
                     b.Property<int>("FollowerNum")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasDefaultValue(0)
-                        .HasAnnotation("Relational:JsonPropertyName", "follower_number");
+                        .HasDefaultValue(0);
 
                     b.Property<int>("FollowingNum")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasDefaultValue(0)
-                        .HasAnnotation("Relational:JsonPropertyName", "following_number");
+                        .HasDefaultValue(0);
 
                     b.Property<string>("JoinedDate")
                         .IsRequired()
@@ -66,20 +61,16 @@ namespace Onlycats.UserService.Migrations
                     b.Property<int>("PostNum")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasDefaultValue(0)
-                        .HasAnnotation("Relational:JsonPropertyName", "number_posts");
+                        .HasDefaultValue(0);
 
                     b.Property<string>("ProfilePicture")
-                        .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
-                        .HasAnnotation("Relational:JsonPropertyName", "profile_picture");
+                        .HasColumnType("character varying(255)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
-                        .HasAnnotation("Relational:JsonPropertyName", "username");
+                        .HasColumnType("character varying(255)");
 
                     b.HasKey("UserId");
 

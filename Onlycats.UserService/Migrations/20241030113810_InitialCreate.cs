@@ -19,7 +19,7 @@ namespace Onlycats.UserService.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DisplayName = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     UserName = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    ProfilePicture = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    ProfilePicture = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     FollowerNum = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
                     FollowingNum = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
                     PostNum = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),

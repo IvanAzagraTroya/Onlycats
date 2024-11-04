@@ -6,6 +6,7 @@ namespace Onlycats.PostService.Models
     {
         public ObjectId Id { get; set; }
         public ObjectId Post_id { get; set; }
+        public int UserId { get; set; }
         public required string Content { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlycatsTFG.models;
 using OnlycatsTFG.repository;
@@ -33,14 +34,16 @@ namespace Onlycats.UserService.Controllers
             return Created();
         }
 
-        [HttpPut("users/update")] 
+        [HttpPut("users/update")]
+        [Authorize]
         public async Task<IActionResult> UpdateUserAsync([FromBody] User user)
         {
             await _userRepository.UpdateAsync(user);
             return Ok(user);
         }
-        [HttpGet("users/id")]
-        public async Task<IActionResult> GetByIdAsync([FromBody] int id)
+        [HttpGet("users/{id}")]
+        [Authorize]
+        public async Task<IActionResult> GetByIdAsync([FromQuery] int id)
         {
             var user = await _userRepository.GetByIdAsync(id);
             if (user == null) 

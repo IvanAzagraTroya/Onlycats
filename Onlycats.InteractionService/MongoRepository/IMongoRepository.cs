@@ -9,5 +9,6 @@ namespace OnlycatsTFG.repository.mongorepository{
         Task<List<T>> GetInteractionsByUserId(int userId);
         Task<List<T>> GetPostInteractionsOrderedByDateAsync(int postId);
         Task<List<T>> GetByInteractionType(int type);
+        Task<List<T>> GetByOtherIdAsync(Key id);
     }
 }

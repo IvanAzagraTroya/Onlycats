@@ -7,6 +7,11 @@
   },
   "AllowedHosts": "*",
   "ConnectionStrings": {
-    "DefaultConnection": "Host=localhost;Port=5432;Database=onlycats;Username=postgres;Password=1234;"
+    "DefaultConnection": "Host=onlycats-postgresdb-1;Port=5432;Database=onlycats;Username=postgres;Password=1234;"
+  },
+  "Jwt": {
+    "Issuer": "Ivan",
+    "Audience": "onlycats",
+    "Key": "myverystrongsecretkeythatexceeds32characters"
   }
 }
