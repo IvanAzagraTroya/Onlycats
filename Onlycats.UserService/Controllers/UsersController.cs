@@ -41,22 +41,21 @@ namespace Onlycats.UserService.Controllers
             await _userRepository.UpdateAsync(user);
             return Ok(user);
         }
-        [HttpGet("users/{id}")]
-        [Authorize]
-        public async Task<IActionResult> GetByIdAsync([FromQuery] int id)
+        [HttpGet("users/user/{id}")]
+        public async Task<IActionResult> GetByIdAsync(int id)
         {
             var user = await _userRepository.GetByIdAsync(id);
             if (user == null) 
             { 
                 return NotFound(user);
             }
-            return Ok(User);
+            return Ok(user);
         }
 
-        [HttpGet("users/email")]
-        public async Task<IActionResult> GetByEmailAsync([FromQuery] string email)
+        [HttpGet("users/email/{email}")]
+        public IActionResult GetByEmail(string email)
         {
-            var user = await _userRepository.GetByEmailAsync(email);
+            var user = _userRepository.GetByEmail(email);
             if(user == null)
             {
                 return NotFound(user);

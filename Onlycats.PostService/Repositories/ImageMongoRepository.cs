@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver;
 using Onlycats.PostService.Models;
+using Onlycats.PostService.Services;
 using OnlycatsTFG.PostService.Repositories;
 
 namespace OnlycatsTFG.PostService.MongoRepository

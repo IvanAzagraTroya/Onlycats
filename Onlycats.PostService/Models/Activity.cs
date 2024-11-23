@@ -9,6 +9,7 @@ namespace OnlycatsTFG.models{
         public required int PostId { get; set;} //Cambiar esto a string una vez ya haya posts con ObjectId real y borrar los que usan id's int de prueba creados de forma manual
         public required int UserId {get; set;}
         public ActivityType ActionType {get; set;}
+        public string? Text { get; set; }
         public string ActivityDate { get; set; } = DateTime.Now.ToString();
     }
 

@@ -1,20 +1,32 @@
-using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Onlycats.UserService.Utils;
 using OnlycatsTFG.models;
 using OnlycatsTFG.repository;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 var Config = builder.Configuration.AddJsonFile("Onlycats.UserService.appsettings.json").Build();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-//string postgresConnectionString = File.ReadAllText("/run/secrets/postgres_connection_string");
-//builder.Configuration["ConnectionStrings:Postgres"] = postgresConnectionString;
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = Config["Jwt:Issuer"],
+        ValidAudience = Config["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config["Jwt:Key"]))
+    };
+});
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
@@ -33,10 +45,6 @@ builder.Services.AddScoped(typeof(IRepository<int, User>), typeof(UserRepository
 
 var app = builder.Build();
 
-//var context = app.Services.GetRequiredService<ApplicationDbContext>();
-//context.Database.Migrate();
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

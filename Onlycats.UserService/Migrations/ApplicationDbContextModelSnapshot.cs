@@ -49,6 +49,9 @@ namespace Onlycats.UserService.Migrations
                         .HasColumnType("integer")
                         .HasDefaultValue(0);
 
+                    b.Property<bool>("IsVerified")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("JoinedDate")
                         .IsRequired()
                         .HasColumnType("text");
@@ -71,6 +74,10 @@ namespace Onlycats.UserService.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
+
+                    b.Property<string>("UserRole")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("UserId");
 

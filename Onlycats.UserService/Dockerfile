@@ -20,8 +20,9 @@ FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "Onlycats.UserService.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-FROM base AS final
+FROM build AS final
 WORKDIR /app
+COPY --from=build src/Onlycats.UserService src/Onlycats.UserService
 COPY --from=publish /app/publish .
 ENV PATH="$PATH:/root/.dotnet/tools"
-ENTRYPOINT ["dotnet", "Onlycats.UserService.dll"]
+ENTRYPOINT ["sh", "-c", " sleep 10 && dotnet ef database update --project src/Onlycats.UserService && dotnet Onlycats.UserService.dll"]

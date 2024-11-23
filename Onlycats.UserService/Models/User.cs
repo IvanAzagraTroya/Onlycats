@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace OnlycatsTFG.models
 {
@@ -14,11 +13,14 @@ namespace OnlycatsTFG.models
         public int FollowerNum { get; set; } = 0;
         public int FollowingNum { get; set; } = 0;
         public int PostNum { get; set; } = 0;
+        public bool IsVerified { get; set; } = false;
         [Required]
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
-        public string JoinedDate { get; } = DateTime.Now.ToString();
+        public string JoinedDate { get; } = DateTime.UtcNow.ToString();
+        public string UserRole { get; set; } = Role.User.ToString();
+        public enum Role { User, Admin }
 
         public User(string displayName, string userName, string email, string password) 
         { 

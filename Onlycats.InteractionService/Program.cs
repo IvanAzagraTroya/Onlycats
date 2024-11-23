@@ -9,10 +9,7 @@ using MongoDB.Bson;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -32,31 +29,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     };
 });
 
-//string mongoConnectionString = File.ReadAllText("/run/secrets/mongodb_connection_string");
-//builder.Configuration["ConnectionStrings:MongoDB"] = mongoConnectionString;
 var connectionString = builder.Configuration.GetConnectionString("mongoconnection");
 var client = new MongoClient(connectionString);
 
 var database = client.GetDatabase("onlycats");
-//testing db
-//var newActivities = new List<Activity>
-//{
-//    new Activity
-//    {
-//        PostId = 1,
-//        UserId = 1,
-//        ActionType = ActivityType.Like
-//    },
-//    new Activity
-//    {
-//        PostId = 2,
-//        UserId = 2,
-//        ActionType = ActivityType.Comment
-//    }
-//};
 var activitiesDb = database.GetCollection<Activity>("activities");
-//activitiesDb.InsertMany(newActivities);
-
 
 builder.Services.AddScoped<IMongoRepository<Activity, ObjectId>>(
     provider => new ActivityMongoRepository<Activity, ObjectId>(activitiesDb)
@@ -66,7 +43,6 @@ builder.Services.AddScoped<IMongoRepository<Activity, ObjectId>>(
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

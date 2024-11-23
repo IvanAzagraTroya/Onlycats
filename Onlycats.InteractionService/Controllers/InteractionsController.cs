@@ -19,7 +19,6 @@ namespace Onlycats.InteractionService.Controllers
             _mongoRepository = mongoRepository;
         }
         [HttpGet("interactions")]
-        [Authorize]
         public async Task<ActionResult<List<Activity>>> ReadAll()
         {
             var interactions = await _mongoRepository.ReadAll();
