@@ -34,9 +34,9 @@ namespace OnlycatsTFG.repository{
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<T> GetByEmailAsync(string email)
+        public T GetByEmail(string email)
         {
-            return await _dbSet.Where(i => i.Email.ToLower() == email.ToLower()).FirstOrDefaultAsync();
+            return _dbSet.Where(i => i.Email.ToLower() == email.ToLower()).FirstOrDefault();
         }
 
         public async Task<T> GetByIdAsync(int id)

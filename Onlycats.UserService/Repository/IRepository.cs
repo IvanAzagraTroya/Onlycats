@@ -3,7 +3,7 @@ namespace OnlycatsTFG.repository{
     {
         Task<List<T>> GetAllAsync();
         Task<T> GetByIdAsync(Key id);
-        Task<T> GetByEmailAsync(string email);
+        T GetByEmail(string email);
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(Key id);

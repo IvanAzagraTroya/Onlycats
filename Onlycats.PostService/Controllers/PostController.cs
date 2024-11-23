@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using Onlycats.PostService.Services;
 using OnlycatsTFG.PostService.Repositories;
 
 namespace OnlycatsTFG.PostService.Controllers
@@ -11,9 +12,11 @@ namespace OnlycatsTFG.PostService.Controllers
     {
         private readonly IMongoRepository<Post, ObjectId> _mongoRepository;
         private readonly ILogger<PostsController> _logger;
+        private readonly ImageService _service;
 
-        public PostsController(ILogger<PostsController> logger, IMongoRepository<Post, ObjectId> mongoRepository)
+        public PostsController(ILogger<PostsController> logger, IMongoRepository<Post, ObjectId> mongoRepository, ImageService service)
         {
+            _service = service;
             _logger = logger;
             _mongoRepository = mongoRepository;
         }
@@ -41,10 +44,18 @@ namespace OnlycatsTFG.PostService.Controllers
         }
         [HttpPost("posts/insert")]
         [Authorize]
-        public async Task<ActionResult> AddPostAsync(Post entity)
+        public async Task<ActionResult> AddPostAsync([FromForm] Post entity, [FromForm] IFormFile file)
         {
+            var postId = ObjectId.GenerateNewId();
+            entity.Id = postId.ToString();
+            
+            using (var stream = file.OpenReadStream())
+            {
+                var imagePath = _service.SaveImage(entity.UserId, stream, file.FileName, postId.ToString());
+                entity.ImageUrl = imagePath;
+            }
             await _mongoRepository.CreateAsync(entity);
-            return Created();
+            return Created("Post ID: ", entity.Id);
         }
         [HttpPut("posts/update/{entity.Id}")]
         [Authorize]

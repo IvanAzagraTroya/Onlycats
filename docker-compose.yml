@@ -11,6 +11,10 @@ services:
     #   - mongodb_connection_string
     volumes:
       - ./Onlycats.PostService:/src/Onlycats.PostService
+      - images:/app/images
+    depends_on:
+      - postgresdb
+      - mongodb
   interactionservice:
      build:
        context: .
@@ -25,6 +29,9 @@ services:
     #    - mongodb_connection_string
      volumes:
       - ./Onlycats.InteractionService:/src/Onlycats.InteractionService
+     depends_on:
+      - mongodb
+      - postgresdb
     
   postgresdb:
     image: postgres:latest
@@ -38,6 +45,11 @@ services:
       - onlycats-network
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck: 
+      test: ["CMD-SHELL", "pg_isready -U postgres"] 
+      interval: 10s 
+      timeout: 5s 
+      retries: 5
   userservice:
      build:
        context: .
@@ -55,12 +67,12 @@ services:
        - POSTGRES_PASSWORD=1234
      depends_on:
        - postgresdb
-     command: >
-       sh -c "dotnet ef migrations add InitialCreate; dotnet ef database update --no-build; dotnet Onlycats.UserService.dll"
     #  secrets:
     #    - postgres_connection_string
      volumes:
        - ./Onlycats.UserService:/src/Onlycats.UserService
+    # entrypoint: > 
+    #  sh -c "sleep 10 && dotnet ef migrations add InitialCreate && dotnet ef database update --no-build && dotnet Onlycats.UserService.dll"
   gateway:
      build:
        context: ./Gateway
@@ -77,12 +89,28 @@ services:
        - postservice
        - interactionservice
        - userservice
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=Ivan
+      - MONGO_INITDB_ROOT_PASSWORD=mongodatabase
+      - MONGO_INITDB_DATABASE=onlycats
+    ports:
+      - "27017:27017"
+    networks:
+      - onlycats-network
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongoinit.js:/docker-entrypoint-mongoinit.d
 networks:
   onlycats-network:
     driver: bridge
     attachable: true
 volumes:
  pgdata:
+ images:
+ mongodb_data:
 # secrets:
 #   mongodb_connection_string:
 #     external: true

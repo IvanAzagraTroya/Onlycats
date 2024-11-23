@@ -1,6 +1,5 @@
 ﻿{
   "Routes": [
-
     {
       "DownstreamPathTemplate": "/api/posts",
       "DownstreamScheme": "http",
@@ -13,7 +12,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 3,
+        "Limit": 500,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/posts",
@@ -34,7 +33,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 3,
+        "Limit": 500,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/posts/{id}",
@@ -55,7 +54,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 3,
+        "Limit": 500,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/posts/create_post",
@@ -76,7 +75,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 3,
+        "Limit": 500,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/posts/update_post/{id}",
@@ -97,7 +96,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 3,
+        "Limit": 500,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/posts/delete_post/{id}",
@@ -112,12 +111,6 @@
           "Port": 8080
         }
       ],
-      "RateLimitOptions": {
-        "EnableRateLimiting": true,
-        "Period": "10s",
-        "Limit": 3,
-        "PeriodTimespan": 10
-      },
       "UpstreamPathTemplate": "/onlycats/comments",
       "UpstreamHttpMethod": [ "GET" ]
     },
@@ -136,7 +129,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 3,
+        "Limit": 500,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/comments/{id}",
@@ -157,7 +150,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 3,
+        "Limit": 500,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/comments/insert",
@@ -178,7 +171,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 3,
+        "Limit": 500,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/comments/delete/{id}",
@@ -193,12 +186,6 @@
           "Port": 8080
         }
       ],
-      "RateLimitOptions": {
-        "EnableRateLimiting": true,
-        "Period": "10s",
-        "Limit": 3,
-        "PeriodTimespan": 10
-      },
       "UpstreamPathTemplate": "/onlycats/interactions",
       "UpstreamHttpMethod": [ "GET" ]
     },
@@ -217,7 +204,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 3,
+        "Limit": 500,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/interactions/{id}",
@@ -238,7 +225,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 3,
+        "Limit": 500,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/interactions/insert",
@@ -259,7 +246,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 3,
+        "Limit": 500,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/interactions/update/{id}",
@@ -280,7 +267,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 3,
+        "Limit": 500,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/interactions/delete/{id}",
@@ -301,7 +288,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 3,
+        "Limit": 500,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/interactions/user/{userId}",
@@ -322,7 +309,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 3,
+        "Limit": 500,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/interactions/date/{id}",
@@ -343,7 +330,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 3,
+        "Limit": 500,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/interactions/{type}",
@@ -358,23 +345,8 @@
           "Port": 8080
         }
       ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      },
       "UpstreamPathTemplate": "/onlycats/users",
       "UpstreamHttpMethod": [ "GET" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/users/create",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "onlycats-userservice-1",
-          "Port": 8080
-        }
-      ],
-      "UpstreamPathTemplate": "/onlycats/create_user",
-      "UpstreamHttpMethod": [ "POST" ]
     },
     {
       "DownstreamPathTemplate": "/api/users/update/{id}",
@@ -388,11 +360,11 @@
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer"
       },
-      "UpstreamPathTemplate": "/onlycats/update_user/{id}",
+      "UpstreamPathTemplate": "/onlycats/update/{id}",
       "UpstreamHttpMethod": [ "PUT" ]
     },
     {
-      "DownstreamPathTemplate": "/api/users/{id}",
+      "DownstreamPathTemplate": "/api/users/user/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -400,14 +372,11 @@
           "Port": 8080
         }
       ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      },
-      "UpstreamPathTemplate": "/onlycats/user_id/{id}",
+      "UpstreamPathTemplate": "/onlycats/user/{id}",
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/users/email",
+      "DownstreamPathTemplate": "/api/users/email/{email}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -415,7 +384,7 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/onlycats/user_email",
+      "UpstreamPathTemplate": "/onlycats/user_email/{email}",
       "UpstreamHttpMethod": [ "GET" ]
     },
     {

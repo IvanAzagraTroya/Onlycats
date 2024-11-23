@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Onlycats.UserService.DTOs
 {
@@ -8,21 +10,28 @@ namespace Onlycats.UserService.DTOs
 
         public required string Password { get; set; }
 
-        public required string DisplayName { get; set; }
-        public required string UserName { get; set; }
+        public string? DisplayName { get; set; }
+        public string? UserName { get; set; }
+
+        public UserDTO() { }
 
         public UserDTO(string email, string password)
         {
             Email = email;
             Password = password;
         }
-
+        
         public UserDTO(string displayName, string userName, string email, string password)
         {
             DisplayName = displayName;
             UserName = userName;
             Email = email;
             Password = password;
+        }
+
+        public UserDTO FromJson(string json)
+        {
+            return JsonSerializer.Deserialize<UserDTO>(json);
         }
     }
 }

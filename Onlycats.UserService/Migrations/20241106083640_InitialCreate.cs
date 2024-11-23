@@ -23,9 +23,11 @@ namespace Onlycats.UserService.Migrations
                     FollowerNum = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
                     FollowingNum = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
                     PostNum = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
+                    IsVerified = table.Column<bool>(type: "boolean", nullable: false),
                     Email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     Password = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    JoinedDate = table.Column<string>(type: "text", nullable: false)
+                    JoinedDate = table.Column<string>(type: "text", nullable: false),
+                    UserRole = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
