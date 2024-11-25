@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using Onlycats.PostService.Services;
 using OnlycatsTFG.PostService.Repositories;
+using System.Net.Mime;
 
 namespace OnlycatsTFG.PostService.Controllers
 {
@@ -10,11 +11,11 @@ namespace OnlycatsTFG.PostService.Controllers
     [Route("api/")]
     public class PostsController : ControllerBase
     {
-        private readonly IMongoRepository<Post, ObjectId> _mongoRepository;
+        private readonly IMongoRepository<Post, string> _mongoRepository;
         private readonly ILogger<PostsController> _logger;
         private readonly ImageService _service;
 
-        public PostsController(ILogger<PostsController> logger, IMongoRepository<Post, ObjectId> mongoRepository, ImageService service)
+        public PostsController(ILogger<PostsController> logger, IMongoRepository<Post, string> mongoRepository, ImageService service)
         {
             _service = service;
             _logger = logger;
@@ -35,8 +36,8 @@ namespace OnlycatsTFG.PostService.Controllers
         [Authorize]
         public async Task<ActionResult<Post>> ReadPostByIdAsync(string id)
         {
-            var postId = new ObjectId(id);
-            var post = await _mongoRepository.ReadByIdAsync(postId);
+            //var postId = new ObjectId(id);
+            var post = await _mongoRepository.ReadByIdAsync(id);
             if (post == null) {
                 return NotFound();
             }
@@ -61,16 +62,16 @@ namespace OnlycatsTFG.PostService.Controllers
         [Authorize]
         public async Task<ActionResult> UpdatePostAsync(Post entity)
         {
-            var postId = new ObjectId(entity.Id);
-            await _mongoRepository.UpdateAsync(postId, entity);
+            //var postId = new ObjectId(entity.Id);
+            await _mongoRepository.UpdateAsync(entity.Id, entity);
             return NoContent();
         }
         [HttpDelete("posts/delete/{id}")]
         [Authorize]
         public async Task<ActionResult> DeletePostAsync(string id)
         {
-            var postId = new ObjectId(id);
-            await _mongoRepository.DeleteAsync(postId);
+            //var postId = new ObjectId(id);
+            await _mongoRepository.DeleteAsync(id);
             return NoContent();
         }
         [HttpGet("posts/user/{id}")]
@@ -80,6 +81,39 @@ namespace OnlycatsTFG.PostService.Controllers
             var posts = await _mongoRepository.GetByOtherIdAsync(id);
             if(posts.Count() == 0) return NoContent();
             return Ok(posts);
+        }
+
+        [HttpDelete("posts/user")]
+        [Authorize]
+        public async Task<ActionResult> DeleteAllUserPosts(int id)
+        {
+            var posts = await _mongoRepository.GetByOtherIdAsync(id);
+            posts.ForEach(p => _mongoRepository.DeleteAsync(p.Id));
+            return NoContent();
+        }
+
+        [HttpGet("posts/image")]
+        public IActionResult GetPostImage([FromQuery]Post post)
+        {
+            var url = post.ImageUrl;
+            if (string.IsNullOrEmpty(url)) return BadRequest("The post has no image url");
+            if (!System.IO.File.Exists(url)) return NotFound("Image not found");
+            var image = System.IO.File.OpenRead(url);
+            var filename = Path.GetFileName(url);
+            var fileImage = File(image, "application/octet-stream", filename);
+            return fileImage;
+        }
+
+        [HttpPatch("posts/update_postlikes/{id}")]
+        [Authorize] //todo fix this.
+        public async Task<ActionResult> UpdateLikes(string id, [FromBody] string isLiked) 
+        {
+            var post = await _mongoRepository.ReadByIdAsync(id);
+            if (post == null) return NotFound("There's no post with that id");
+            if (isLiked.Equals("true")) post.LikeNumber++;
+            else post.LikeNumber--;
+            await _mongoRepository.UpdateAsync(id, post);
+            return Ok(post);
         }
     }
 }

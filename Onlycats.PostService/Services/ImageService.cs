@@ -15,8 +15,6 @@
             if (!Directory.Exists(directoryPath))
             {
                 Directory.CreateDirectory(directoryPath);
-                //SetDirectoryPermissions("images/"+userId.ToString());
-                //SetDirectoryPermissions("images/" + userId.ToString()+"/"+date);
                 SetDirectoryPermissions(directoryPath);
             }
 

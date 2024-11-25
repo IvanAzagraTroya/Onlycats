@@ -51,7 +51,6 @@ namespace OnlycatsTFG.PostService.Controllers
             return NoContent();
         }
         [HttpGet("comments/post/{id}")]
-        [Authorize]
         public async Task<ActionResult<List<Comment>>> GetCommentByPostIdAsync(string id)
         {
             var postId = new ObjectId(id);
