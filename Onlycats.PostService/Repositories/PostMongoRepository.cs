@@ -48,5 +48,11 @@ namespace OnlycatsTFG.PostService.MongoRepository
         {
             return await _collection.Find(Builders<T>.Filter.Eq("ImageUrl", id)).ToListAsync();
         }
+
+        public async Task<DeleteResult> DeletePostByUserId(int id)
+        {
+            var posts = Builders<T>.Filter.Eq("UserId", id);
+            return await _collection.DeleteManyAsync(posts);
+        }
     }
 }

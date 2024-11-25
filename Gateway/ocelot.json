@@ -9,13 +9,19 @@
           "Port": 8080
         }
       ],
-      "RateLimitOptions": {
-        "EnableRateLimiting": true,
-        "Period": "10s",
-        "Limit": 500,
-        "PeriodTimespan": 10
-      },
       "UpstreamPathTemplate": "/onlycats/posts",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/posts/image",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "onlycats-postservice-1",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/onlycats/posts/image",
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
@@ -33,7 +39,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 500,
+        "Limit": 5000,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/posts/{id}",
@@ -54,7 +60,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 500,
+        "Limit": 5000,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/posts/create_post",
@@ -75,10 +81,31 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 500,
+        "Limit": 5000,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/posts/update_post/{id}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/posts/update_likes/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "onlycats-postservice-1",
+          "Port": 8080
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "10s",
+        "Limit": 5000,
+        "PeriodTimespan": 10
+      },
+      "UpstreamPathTemplate": "/onlycats/posts/update_likes/{id}",
       "UpstreamHttpMethod": [ "PUT" ]
     },
     {
@@ -96,7 +123,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 500,
+        "Limit": 5000,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/posts/delete_post/{id}",
@@ -115,6 +142,24 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
+      "DownstreamPathTemplate": "/api/comments/post/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "onlycats-postservice-1",
+          "Port": 8080
+        }
+      ],
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "10s",
+        "Limit": 5000,
+        "PeriodTimespan": 10
+      },
+      "UpstreamPathTemplate": "/onlycats/comments/post/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/comments/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -129,7 +174,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 500,
+        "Limit": 5000,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/comments/{id}",
@@ -150,7 +195,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 500,
+        "Limit": 5000,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/comments/insert",
@@ -171,7 +216,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 500,
+        "Limit": 5000,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/comments/delete/{id}",
@@ -204,7 +249,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 500,
+        "Limit": 5000,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/interactions/{id}",
@@ -225,7 +270,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 500,
+        "Limit": 5000,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/interactions/insert",
@@ -246,7 +291,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 500,
+        "Limit": 5000,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/interactions/update/{id}",
@@ -267,7 +312,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 500,
+        "Limit": 5000,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/interactions/delete/{id}",
@@ -288,7 +333,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 500,
+        "Limit": 5000,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/interactions/user/{userId}",
@@ -309,7 +354,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 500,
+        "Limit": 5000,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/interactions/date/{id}",
@@ -330,7 +375,7 @@
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "10s",
-        "Limit": 500,
+        "Limit": 5000,
         "PeriodTimespan": 10
       },
       "UpstreamPathTemplate": "/onlycats/interactions/{type}",

@@ -20,6 +20,11 @@ namespace OnlycatsTFG
             Text = text;
         }
 
+        public Post(string imageUrl)
+        {
+            ImageUrl = imageUrl;
+        }
+
         public Post() { }
     }
 }

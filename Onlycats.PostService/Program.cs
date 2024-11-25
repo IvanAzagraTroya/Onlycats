@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -33,6 +35,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     };
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 var connectionString = builder.Configuration.GetConnectionString("mongoconnection");
 var client = new MongoClient(connectionString);
 
@@ -51,8 +63,8 @@ foreach (var collectionName in requiredCollections)
 }
 
 var postdb = database.GetCollection<Post>("posts");
-builder.Services.AddScoped<IMongoRepository<Post, ObjectId>>(
-    provider => new PostMongoRepository<Post, ObjectId>(postdb)
+builder.Services.AddScoped<IMongoRepository<Post, string>>(
+    provider => new PostMongoRepository<Post, string>(postdb)
     );
 
 var commentdb = database.GetCollection<Comment>("comments");
@@ -61,13 +73,25 @@ builder.Services.AddScoped<IMongoRepository<Comment, ObjectId>>(
     );
 builder.Services.AddScoped<ImageService>();
 
+builder.Services.AddDataProtection().PersistKeysToFileSystem(
+    new DirectoryInfo(@"program/persist"))
+    .SetApplicationName("Onlycats.Posts");
+
 var app = builder.Build();
 
+app.UseCors("AllowAllOrigins");
+
 app.UseHttpsRedirection();
+
+//app.UseStaticFiles(new StaticFileOptions
+//{
+//    FileProvider = new PhysicalFileProvider("/app/images")
+//});
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();

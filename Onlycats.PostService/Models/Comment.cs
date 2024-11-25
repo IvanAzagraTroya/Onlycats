@@ -14,6 +14,5 @@ namespace OnlycatsTFG.models{
         public required string Username { get; set; }
         public string CommentDate { get; set; } = DateTime.Now.ToString();
         public int Likes {get; set;} = 0;
-        public int Dislikes {get; set;} = 0;
     }
 }
