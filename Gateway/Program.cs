@@ -18,6 +18,7 @@ builder.Services.AddAuthentication(opt => {
     opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
+#pragma warning disable CS8604 // Posible argumento de referencia nulo
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
@@ -28,6 +29,7 @@ builder.Services.AddAuthentication(opt => {
         ValidAudience = Config["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config["Jwt:Key"]))
     };
+#pragma warning restore CS8604 // Posible argumento de referencia nulo
 });
 
 builder.Services.AddCors(options =>

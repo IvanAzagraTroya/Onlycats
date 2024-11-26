@@ -5,7 +5,7 @@ namespace OnlycatsTFG.models{
     public class Comment {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public string? Id { get; set; }
         [BsonRepresentation(BsonType.ObjectId)]
         public required string PostId {get; set;}
         public required int UserId {get; set;}

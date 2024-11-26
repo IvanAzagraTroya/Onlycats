@@ -35,9 +35,9 @@ namespace OnlycatsTFG.PostService.Controllers
             if (comment == null) return NotFound();
             return Ok(comment);
         }
-        [HttpPost("comments/insert/{entity.Id}")]
+        [HttpPost("comments/insert")]
         [Authorize]
-        public async Task<ActionResult> AddCommentAsync(Comment entity)
+        public async Task<ActionResult> AddCommentAsync([FromForm] Comment entity)
         {
             await _mongoRepository.CreateAsync(entity);
             return Created();

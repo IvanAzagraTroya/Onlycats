@@ -1,15 +1,13 @@
-﻿namespace Onlycats.PostService.Services
+﻿namespace Onlycats.UserService.Services
 {
-    using System;
     using System.IO;
     using Mono.Unix;
 
     public class ImageService
     {
-        public string SaveImage(int userId, Stream imageStream, string imageName, string postId)
+        public string SaveImage(string username, Stream imageStream, string imageName)
         {
-            var date = DateTime.UtcNow.ToString("yyyy-MM-dd");
-            var directoryPath = Path.Combine("images", userId.ToString(), date, postId);
+            var directoryPath = Path.Combine("profile_pic", username);
 
             if (!Directory.Exists(directoryPath))
             {

@@ -27,9 +27,10 @@ namespace Onlycats.InteractionService.Controllers
         }
 
         [HttpGet("interactions/{id}")]
-        public async Task<ActionResult<Activity>> ReadInteractionByIdAsync(ObjectId id)
+        public async Task<ActionResult<Activity>> ReadInteractionByIdAsync(string id)
         {
-            var interaction = await _mongoRepository.ReadByIdAsync(id);
+            var objId = new ObjectId(id);
+            var interaction = await _mongoRepository.ReadByIdAsync(objId);
             if(interaction == null) return NotFound();
             return Ok(interaction);
         }
@@ -42,7 +43,6 @@ namespace Onlycats.InteractionService.Controllers
         }
         [HttpPut("/interactions/update/{entity.Id}")]
         [Authorize]
-
         public async Task<ActionResult> UpdateInteractionAsync([FromBody]Activity entity)
         {
             var interactionId = new ObjectId(entity.Id);
@@ -69,10 +69,11 @@ namespace Onlycats.InteractionService.Controllers
 
         [HttpGet("interactions/date/{postId}")]
         [Authorize]
-        public async Task<ActionResult<List<Activity>>> GetPostInteractionsOrderedByDateAsync(int postId)
+        public async Task<ActionResult<List<Activity>>> GetPostInteractionsOrderedByDateAsync(string postId)
         {
-            var activities = await _mongoRepository.GetPostInteractionsOrderedByDateAsync(postId);
-            if (activities.Count == 0) return NotFound();
+            var objId = new ObjectId(postId);
+            var activities = await _mongoRepository.GetPostInteractionsOrderedByDateAsync(objId);
+            if (activities.Count == 0) return NoContent();
             return Ok(activities);
         }
 
@@ -87,10 +88,11 @@ namespace Onlycats.InteractionService.Controllers
 
         [HttpGet("interactions/post/{id}")]
         [Authorize]
-        public async Task<ActionResult<List<Activity>>> GetByPostIdAsync(ObjectId postId)
+        public async Task<ActionResult<List<Activity>>> GetByPostIdAsync(string postId)
         {
-            var activities = await _mongoRepository.GetByOtherIdAsync(postId);
-            if (activities.Count() == 0) return NoContent();
+            var id = new ObjectId(postId);
+            var activities = await _mongoRepository.GetByOtherIdAsync(id);
+            if (activities.Count() == 0) return NotFound();
             return Ok(activities);
         }
     }

@@ -63,7 +63,9 @@ namespace OnlycatsTFG.PostService.Controllers
         public async Task<ActionResult> UpdatePostAsync(Post entity)
         {
             //var postId = new ObjectId(entity.Id);
+#pragma warning disable CS8604 // Posible argumento de referencia nulo
             await _mongoRepository.UpdateAsync(entity.Id, entity);
+#pragma warning restore CS8604 // Posible argumento de referencia nulo
             return NoContent();
         }
         [HttpDelete("posts/delete/{id}")]
@@ -88,7 +90,9 @@ namespace OnlycatsTFG.PostService.Controllers
         public async Task<ActionResult> DeleteAllUserPosts(int id)
         {
             var posts = await _mongoRepository.GetByOtherIdAsync(id);
+#pragma warning disable CS8604 // Posible argumento de referencia nulo
             posts.ForEach(p => _mongoRepository.DeleteAsync(p.Id));
+#pragma warning restore CS8604 // Posible argumento de referencia nulo
             return NoContent();
         }
 
@@ -114,6 +118,15 @@ namespace OnlycatsTFG.PostService.Controllers
             else post.LikeNumber--;
             await _mongoRepository.UpdateAsync(id, post);
             return Ok(post);
+        }
+
+        [HttpGet("posts/ids")] 
+        [Authorize]
+        public async Task<ActionResult<List<string>>> GetAllPostIds([FromQuery]int id)
+        {
+            var posts = await _mongoRepository.GetByOtherIdAsync(id);
+            List<string?> ids = posts.Select(x => x.Id).ToList();
+            return Ok(ids);
         }
     }
 }
