@@ -1,6 +1,7 @@
 ﻿using MongoDB.Driver;
 using OnlycatsTFG.repository.mongorepository;
 using OnlycatsTFG.models;
+using MongoDB.Bson;
 
 namespace OnlycatsTFG.InteractionService.MongoRepository
 {
@@ -46,7 +47,7 @@ namespace OnlycatsTFG.InteractionService.MongoRepository
             return await _collection.Find(Builders<T>.Filter.Eq("UserId", userId)).ToListAsync();
         }
 
-        public async Task<List<T>> GetPostInteractionsOrderedByDateAsync(int postId)
+        public async Task<List<T>> GetPostInteractionsOrderedByDateAsync(Key postId)
         {
             var sort = Builders<T>.Sort.Descending(i => i.ActivityDate);
 

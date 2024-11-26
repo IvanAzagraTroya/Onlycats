@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Onlycats.UserService.Services;
 using OnlycatsTFG.models;
 using OnlycatsTFG.repository;
 
@@ -11,10 +11,12 @@ namespace Onlycats.UserService.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IRepository<int, User> _userRepository;
+        private readonly ImageService _service;
 
-        public UsersController(IRepository<int, User> userRepository)
+        public UsersController(IRepository<int, User> userRepository, ImageService service)
         {
             _userRepository = userRepository;
+            _service = service;
         }
 
         [HttpGet("users")]
@@ -28,8 +30,13 @@ namespace Onlycats.UserService.Controllers
         }
 
         [HttpPost("users/create")]
-        public async Task<IActionResult> AddUserAsync([FromBody] User user)
+        public async Task<IActionResult> AddUserAsync([FromForm] User user, [FromForm]IFormFile file)
         {
+            using (var stream = file.OpenReadStream())
+            {
+                var imagePath = _service.SaveImage(user.DisplayName, stream, file.FileName);
+                user.ProfilePicture= imagePath;
+            }
             await _userRepository.AddAsync(user);
             return Created();
         }
@@ -61,6 +68,18 @@ namespace Onlycats.UserService.Controllers
                 return NotFound(user);
             }
             return Ok(user);
+        }
+
+        [HttpGet("users/profile_picture")]
+        public IActionResult GetPostImage([FromQuery] User user)
+        {
+            var url = user.ProfilePicture;
+            if (string.IsNullOrEmpty(url)) return BadRequest("The post has no image url");
+            if (!System.IO.File.Exists(url)) return NotFound("Image not found");
+            var image = System.IO.File.OpenRead(url);
+            var filename = Path.GetFileName(url);
+            var fileImage = File(image, "application/octet-stream", filename);
+            return fileImage;
         }
     }
 }
