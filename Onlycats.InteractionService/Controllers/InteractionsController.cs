@@ -22,7 +22,7 @@ namespace Onlycats.InteractionService.Controllers
         public async Task<ActionResult<List<Activity>>> ReadAll()
         {
             var interactions = await _mongoRepository.ReadAll();
-            if(interactions.Count == 0) return NotFound();
+            if(interactions.Count == 0) return NoContent();
             return Ok(interactions);
         }
 
@@ -31,12 +31,12 @@ namespace Onlycats.InteractionService.Controllers
         {
             var objId = new ObjectId(id);
             var interaction = await _mongoRepository.ReadByIdAsync(objId);
-            if(interaction == null) return NotFound();
+            if(interaction == null) return NoContent();
             return Ok(interaction);
         }
         [HttpPost("interactions/insert")]
         [Authorize]
-        public async Task<ActionResult> AddInteractionAsync([FromBody]Activity entity)
+        public async Task<ActionResult> AddInteractionAsync([FromForm]Activity entity)
         {
             await _mongoRepository.CreateAsync(entity);
             return Created();
@@ -63,7 +63,7 @@ namespace Onlycats.InteractionService.Controllers
         public async Task<ActionResult<List<Activity>>> GetInteractionsByUserId(int userId)
         {
             var interactions = await _mongoRepository.GetInteractionsByUserId(userId);
-            if (interactions.Count == 0) return NotFound();
+            if (interactions.Count == 0) return NoContent();
             return Ok(interactions);
         }
 
@@ -82,17 +82,17 @@ namespace Onlycats.InteractionService.Controllers
         public async Task<ActionResult<List<Activity>>> GetByActivityType(int type)
         {
             var activities = await _mongoRepository.GetByInteractionType(type);
-            if (activities.Count == 0) return NotFound();
+            if (activities.Count == 0) return NoContent();
             return Ok(activities);
         }
 
-        [HttpGet("interactions/post/{id}")]
+        [HttpGet("interactions/post/id")]
         [Authorize]
-        public async Task<ActionResult<List<Activity>>> GetByPostIdAsync(string postId)
+        public async Task<ActionResult<List<Activity>>> GetByPostIdAsync([FromQuery]string postId)
         {
             var id = new ObjectId(postId);
             var activities = await _mongoRepository.GetByOtherIdAsync(id);
-            if (activities.Count() == 0) return NotFound();
+            if (activities.Count() == 0) return NoContent();
             return Ok(activities);
         }
     }

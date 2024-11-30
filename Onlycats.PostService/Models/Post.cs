@@ -10,7 +10,7 @@ namespace OnlycatsTFG
         public int UserId {get; set; }
         public string ImageUrl { get; set; } = "";
         public string PostDate { get; } = DateTime.UtcNow.ToShortDateString() + " "+DateTime.UtcNow.Hour.ToString() +":"+ DateTime.UtcNow.Minute.ToString();
-        public int LikeNumber {get; set; } = 0;
+        public int LikeNumber {get; set; }
         public string? Text { get; set; }
 
         public Post(int userId, string imageUrl, string? text)

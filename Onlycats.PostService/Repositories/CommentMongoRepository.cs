@@ -20,9 +20,10 @@ namespace OnlycatsTFG.PostService.Controllers
         {
             return await _collection.Find(_ => true).ToListAsync();
         }
-        public async Task<T> ReadByIdAsync(Key id)
+        public async Task<T> ReadByIdAsync(string id)
         {
-            return await _collection.Find(Builders<T>.Filter.Eq("_id", id)).FirstOrDefaultAsync();
+            var commentId = new ObjectId(id);
+            return await _collection.Find(Builders<T>.Filter.Eq("_id", commentId)).FirstOrDefaultAsync();
             //return await (Task<T>)_collection.Find(Builders<T>.Filter.Eq("_id", id)); //_collection.AsQueryable().Where(x => x.PostId == id).FirstOrDefault();
         }
 
@@ -31,16 +32,18 @@ namespace OnlycatsTFG.PostService.Controllers
             await _collection.InsertOneAsync(entity);
         }
 
-        public async Task UpdateAsync(Key id, T entity)
+        public async Task UpdateAsync(string id, T entity)
         {
+            var commentId = new ObjectId(id);
             await _collection.ReplaceOneAsync(
-                Builders<T>.Filter.Eq("_id", id),
+                Builders<T>.Filter.Eq("_id", commentId),
                 entity);
         }
 
-        public async Task DeleteAsync(Key id)
+        public async Task DeleteAsync(string id)
         {
-            await _collection.DeleteOneAsync(Builders<T>.Filter.Eq("_id", id));
+            var commentId = new ObjectId(id);
+            await _collection.DeleteOneAsync(Builders<T>.Filter.Eq("_id", commentId));
         }
 
         public async Task<List<T>> GetByOtherIdAsync(Key id)
