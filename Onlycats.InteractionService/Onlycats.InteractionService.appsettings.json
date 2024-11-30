@@ -7,7 +7,7 @@
   },
   "AllowedHosts": "*",
   "ConnectionStrings": {
-    //"mongoconnection": "mongodb+srv://Ivan:V24%404A810@onlycats.lhcon.mongodb.net/?retryWrites=true&w=majority&appName=Onlycats"
+    //"mongoconnection": "mongodb://Ivan:mongodatabase@localhost:27017/onlycats?authSource=admin"
     "mongoconnection": "mongodb://Ivan:mongodatabase@mongodb:27017/onlycats?authSource=admin"
   },
   "Jwt": {

@@ -5,8 +5,8 @@ namespace OnlycatsTFG.models{
     public class Activity {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id {get; set;}
-        public required int PostId { get; set;} //Cambiar esto a string una vez ya haya posts con ObjectId real y borrar los que usan id's int de prueba creados de forma manual
+        public string? Id {get; set;}
+        public required string PostId { get; set;}
         public required int UserId {get; set;}
         public ActivityType ActionType {get; set;}
         public string? Text { get; set; }

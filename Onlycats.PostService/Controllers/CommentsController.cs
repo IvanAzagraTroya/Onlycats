@@ -30,8 +30,7 @@ namespace OnlycatsTFG.PostService.Controllers
         [HttpGet("comments/{id}")]
         public async Task<ActionResult<Comment>> ReadCommentByIdAsync(string id)
         {
-            var commentId = new ObjectId(id);
-            var comment = await _mongoRepository.ReadByIdAsync(commentId);
+            var comment = await _mongoRepository.ReadByIdAsync(id);
             if (comment == null) return NotFound();
             return Ok(comment);
         }
@@ -46,8 +45,7 @@ namespace OnlycatsTFG.PostService.Controllers
         [Authorize]
         public async Task<ActionResult> DeleteCommentAsync(string id)
         {
-            var commentId = new ObjectId(id);
-            await _mongoRepository.DeleteAsync(commentId);
+            await _mongoRepository.DeleteAsync(id);
             return NoContent();
         }
         [HttpGet("comments/post/{id}")]

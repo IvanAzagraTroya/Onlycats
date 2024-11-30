@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Onlycats.UserService.Services;
 using Onlycats.UserService.Utils;
 using OnlycatsTFG.models;
 using OnlycatsTFG.repository;
@@ -10,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var Config = builder.Configuration.AddJsonFile("Onlycats.UserService.appsettings.json").Build();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
+builder.Services.AddScoped<ImageService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>
 {

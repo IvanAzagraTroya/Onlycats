@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using MongoDB.Driver;
+using Onlycats.PostService.Models;
 using Onlycats.PostService.Services;
 using OnlycatsTFG.PostService.Repositories;
 using System.Net.Mime;
@@ -36,7 +38,7 @@ namespace OnlycatsTFG.PostService.Controllers
         [Authorize]
         public async Task<ActionResult<Post>> ReadPostByIdAsync(string id)
         {
-            //var postId = new ObjectId(id);
+            var postId = new ObjectId(id);
             var post = await _mongoRepository.ReadByIdAsync(id);
             if (post == null) {
                 return NotFound();
@@ -108,14 +110,16 @@ namespace OnlycatsTFG.PostService.Controllers
             return fileImage;
         }
 
-        [HttpPatch("posts/update_postlikes/{id}")]
+        [HttpPut("posts/update_likes/{id}")]
         [Authorize] //todo fix this.
-        public async Task<ActionResult> UpdateLikes(string id, [FromBody] string isLiked) 
+        public async Task<ActionResult> UpdateLikes(string id, [FromBody] Request request)
         {
             var post = await _mongoRepository.ReadByIdAsync(id);
             if (post == null) return NotFound("There's no post with that id");
-            if (isLiked.Equals("true")) post.LikeNumber++;
+
+            if (request.IsLiked) post.LikeNumber++;
             else post.LikeNumber--;
+
             await _mongoRepository.UpdateAsync(id, post);
             return Ok(post);
         }
