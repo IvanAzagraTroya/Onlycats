@@ -223,6 +223,27 @@
       "UpstreamHttpMethod": [ "POST" ]
     },
     {
+      "DownstreamPathTemplate": "/api/comments/update_likes/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "onlycats-postservice-1",
+          "Port": 8080
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "10s",
+        "Limit": 5000,
+        "PeriodTimespan": 10
+      },
+      "UpstreamPathTemplate": "/onlycats/comments/update_likes/{id}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/comments/delete/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [

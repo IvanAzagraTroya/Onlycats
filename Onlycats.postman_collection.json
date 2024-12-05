@@ -1,0 +1,1055 @@
+{
+	"info": {
+		"_postman_id": "b27d3844-d532-4c92-9ddc-fdf4e0d2025b",
+		"name": "Onlycats",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39147469"
+	},
+	"item": [
+		{
+			"name": "https://localhost:7056/api/posts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7056/api/posts",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7056",
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7056/api/posts/update_likes",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"isLiked\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7056/api/posts/update_likes/67437e2a585943ec6d661ec4",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7056",
+					"path": [
+						"api",
+						"posts",
+						"update_likes",
+						"67437e2a585943ec6d661ec4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7056/api/comments/update_likes",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"isLiked\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7056/api/comment/update_likes/6751d6aea15ccdc49e7eb221",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7056",
+					"path": [
+						"api",
+						"comment",
+						"update_likes",
+						"6751d6aea15ccdc49e7eb221"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7056/api/posts/insert",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "UserId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "text",
+							"value": "textoooo",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/ivana/Pictures/Screenshots/Captura de pantalla 2024-06-30 191712.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:7056/api/posts/insert",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7056",
+					"path": [
+						"api",
+						"posts",
+						"insert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7056/api/posts/image/url",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7056/api/posts/image?ImageUrl=C:/Users/ivana/source/repos/Onlycats/Onlycats.PostService/images/0/2024-11-20/1/Captura de pantalla 2024-05-27 230430.png",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7056",
+					"path": [
+						"api",
+						"posts",
+						"image"
+					],
+					"query": [
+						{
+							"key": "ImageUrl",
+							"value": "C:/Users/ivana/source/repos/Onlycats/Onlycats.PostService/images/0/2024-11-20/1/Captura de pantalla 2024-05-27 230430.png"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7056/api/comments",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7056/api/comments/6751d6aea15ccdc49e7eb221",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7056",
+					"path": [
+						"api",
+						"comments",
+						"6751d6aea15ccdc49e7eb221"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7056/api/comments/post/postId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7056/api/comments/post/67425da90b3eabfd51438348",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7056",
+					"path": [
+						"api",
+						"comments",
+						"post",
+						"67425da90b3eabfd51438348"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7244/api/interactions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7244/api/interactions/67152722201b3ba8cb4f303f",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7244",
+					"path": [
+						"api",
+						"interactions",
+						"67152722201b3ba8cb4f303f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7120/api/users?id=0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7120/api/users/me?id=1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7120",
+					"path": [
+						"api",
+						"users",
+						"me"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7120/api/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"email\":\"johndoe@gmail.com\", \r\n    \"Password\": \"securepassword\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7120/api/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7120",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7120/api/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"displayname\": \"Johndoe\",\r\n    \"username\": \"JhonDoe\",\r\n    \"email\": \"ex2@example.com\",\r\n    \"Password\": \"securepassword\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7120/api/register",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7120",
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docker postId",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/onlycats/posts/6713d9536369c3e64cc8a25e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"onlycats",
+						"posts",
+						"6713d9536369c3e64cc8a25e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docker posts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/onlycats/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"onlycats",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docker posts ids",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/onlycats/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"onlycats",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docker post likes",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/onlycats/posts/update_likes/67437e2a585943ec6d661ec4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"onlycats",
+						"posts",
+						"update_likes",
+						"67437e2a585943ec6d661ec4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docker comments likes",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/onlycats/comment/update_likes/6751d6aea15ccdc49e7eb221",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"onlycats",
+						"comment",
+						"update_likes",
+						"6751d6aea15ccdc49e7eb221"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docker comments",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/onlycats/comments/6751d6aea15ccdc49e7eb221",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"onlycats",
+						"comments",
+						"6751d6aea15ccdc49e7eb221"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docker new comment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "postId",
+							"value": "67425da90b3eabfd51438348",
+							"type": "text"
+						},
+						{
+							"key": "userId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "Hala que chulo (comentario de prueba)",
+							"type": "text"
+						},
+						{
+							"key": "displayname",
+							"value": "ex",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "@ex",
+							"type": "text"
+						},
+						{
+							"key": "commentDate",
+							"value": "11/26/2024 12:03:04",
+							"type": "text"
+						},
+						{
+							"key": "likes",
+							"value": "0",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/onlycats/comments/insert",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"onlycats",
+						"comments",
+						"insert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docker comments postid",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/onlycats/comments/post/67425da90b3eabfd51438348",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"onlycats",
+						"comments",
+						"post",
+						"67425da90b3eabfd51438348"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docker interactions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/onlycats/interactions/user/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"onlycats",
+						"interactions",
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docker interactions InteractionId",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/api/interactions/{{InteractionId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"interactions",
+						"{{InteractionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docker interactions postId",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "postId",
+							"value": "67437e2a585943ec6d661ec4",
+							"type": "text"
+						},
+						{
+							"key": "userId",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "actionType",
+							"value": "2",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "text",
+							"value": "Liked your photo!",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/onlycats/interactions/post/id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"onlycats",
+						"interactions",
+						"post",
+						"id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docker post interactions",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "postId",
+							"value": "67437e2a585943ec6d661ec4",
+							"type": "text"
+						},
+						{
+							"key": "userId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "actionType",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "text",
+							"value": "Liked your photo!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/onlycats/interactions/insert",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"onlycats",
+						"interactions",
+						"insert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docker users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/onlycats/users/me?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"onlycats",
+						"users",
+						"me"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docker register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"displayname\":\"ex\",\r\n    \"username\": \"example\",\r\n    \"email\":\"e@gmail.com\", \r\n    \"password\": \"1234\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/onlycats/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"onlycats",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docker login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"email\":\"ex@gmail.com\", \r\n    \"Password\": \"psw\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/onlycats/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"onlycats",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docker create post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "UserId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/ivana/Pictures/Screenshots/settingsImage.png"
+						},
+						{
+							"key": "text",
+							"value": "textooooo",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/onlycats/posts/create_post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"onlycats",
+						"posts",
+						"create_post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docker post image url",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/onlycats/posts/image?ImageUrl=images/1/2024-11-24/674352900e2250c168b1cbf0/Captura%20de%20pantalla%202024-05-27%20230430.png",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"onlycats",
+						"posts",
+						"image"
+					],
+					"query": [
+						{
+							"key": "ImageUrl",
+							"value": "images/1/2024-11-24/674352900e2250c168b1cbf0/Captura%20de%20pantalla%202024-05-27%20230430.png"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "PostId",
+			"value": "6713d9536369c3e64cc8a25e"
+		},
+		{
+			"key": "InteractionId",
+			"value": "67152567206ed7348c0c5c20"
+		},
+		{
+			"key": "JWT",
+			"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzA3MTc3MDgsImlzcyI6Ikl2YW4iLCJhdWQiOiJvbmx5Y2F0cyJ9.8dnava17f7IHbNd3IrObnGyf-GxjkeZQqswCqan82gI"
+		}
+	]
+}
