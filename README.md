@@ -5,8 +5,29 @@ Onlycats es una mezcla entre Twitter e Instagram focalizada al contenido dedicad
 
 En esta red social se pueden compartir fotos de gatos, comentar y valorar junto a otros amantes de los gatos.
 
+## Characteristics
+- Registro e inicio de sesión con autenticación JWT.
+- Subida de imágenes y gestión de publicaciones.
+- Interacciones con likes/dislikes en posts y comentarios.
 
+## Used technologies
+- Backend: .NET Framework 4.7.2, microservicios, autenticación JWT.
+- Bases de datos: PostgreSQL (SQL), MongoDB (NoSQL).
+- Gateway: Ocelot.
+- Contenedores: Docker.
+- Almacenamiento: Contenedores Docker con las bases de datos.
 
+## Architecture
+- Uso de microservicios: PostService, InteractionService, UserService, ImageService.
+- Gateway central para acceder a los servicios usando Ocelot.
+### Service Description:
+- PostService: Este servicio se encarga de manejar tanto posts como comentarios, en él se crean los datos que serán publicados y se guardan las imágenes publicadas creando carpetas por usuario, fecha y post dando la posibildidad de mejorar los posts para aceptar varias imágenes.
+
+- InteractionService: Se encarga de manejas las interacciones y enviar las notificaciones por tipos de interacción (comentario, like y post en este momento).
+
+- UserService: Este servicio trabaja con una base de datos Postgre donde se guarda la información de los usuarios, también realiza el cifrado de la contraseña y maneja la authenticación para devolver los tokens necesarios.
+### Architecture Diagram:
+# FALTA HACERLO
 
 ## API Reference
 
