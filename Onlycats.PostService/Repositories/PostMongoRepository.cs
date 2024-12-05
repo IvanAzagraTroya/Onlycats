@@ -33,7 +33,7 @@ namespace OnlycatsTFG.PostService.MongoRepository
         {
             var postId = new ObjectId(id);
             var filter = Builders<T>.Filter.Eq("_id", postId);
-            var a = await _collection.ReplaceOneAsync(filter,
+            await _collection.ReplaceOneAsync(filter,
                 entity);
         }
 

@@ -111,7 +111,7 @@ namespace OnlycatsTFG.PostService.Controllers
         }
 
         [HttpPut("posts/update_likes/{id}")]
-        [Authorize] //todo fix this.
+        [Authorize]
         public async Task<ActionResult> UpdateLikes(string id, [FromBody] Request request)
         {
             var post = await _mongoRepository.ReadByIdAsync(id);

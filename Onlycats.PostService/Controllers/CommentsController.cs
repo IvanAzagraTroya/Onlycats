@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using Onlycats.PostService.Models;
 using OnlycatsTFG.models;
 using OnlycatsTFG.PostService.Repositories;
 
@@ -55,6 +56,20 @@ namespace OnlycatsTFG.PostService.Controllers
             var comments = await _mongoRepository.GetByOtherIdAsync(postId);
             if (comments.Count() == 0) return NoContent();
             return Ok(comments);
+        }
+
+        [HttpPut("comment/update_likes/{id}")]
+        [Authorize]
+        public async Task<ActionResult> UpdateLikes(string id, [FromBody] Request request)
+        {
+            var comment = await _mongoRepository.ReadByIdAsync(id);
+            if (comment == null) return NotFound("There's no comment with that id");
+
+            if (request.IsLiked) comment.Likes++;
+            else comment.Likes--;
+
+            await _mongoRepository.UpdateAsync(id, comment);
+            return Ok(comment);
         }
     }
 }

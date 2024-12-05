@@ -35,9 +35,9 @@ namespace OnlycatsTFG.PostService.Controllers
         public async Task UpdateAsync(string id, T entity)
         {
             var commentId = new ObjectId(id);
-            await _collection.ReplaceOneAsync(
-                Builders<T>.Filter.Eq("_id", commentId),
-                entity);
+            var filter = Builders<T>.Filter.Eq("_id", commentId);
+            await _collection.ReplaceOneAsync(filter
+                ,entity);
         }
 
         public async Task DeleteAsync(string id)
