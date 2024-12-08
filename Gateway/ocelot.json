@@ -223,7 +223,7 @@
       "UpstreamHttpMethod": [ "POST" ]
     },
     {
-      "DownstreamPathTemplate": "/api/comments/update_likes/{id}",
+      "DownstreamPathTemplate": "/api/comment/update_likes/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
