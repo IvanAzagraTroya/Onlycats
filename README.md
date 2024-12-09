@@ -27,7 +27,7 @@ En esta red social se pueden compartir fotos de gatos, comentar y valorar junto 
 
 - UserService: Este servicio trabaja con una base de datos Postgre donde se guarda la información de los usuarios, también realiza el cifrado de la contraseña y maneja la authenticación para devolver los tokens necesarios.
 ### Architecture Diagram:
-# FALTA HACERLO
+![Onlycats/Sin título-2024-12-08-1648.svg](https://github.com/IvanAzagraTroya/Onlycats/blob/master/Sin%20t%C3%ADtulo-2024-12-08-1648.svg)
 
 ## API Reference
 
