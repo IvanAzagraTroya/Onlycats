@@ -103,6 +103,18 @@ services:
     volumes:
       - mongodb_data:/data/db
       - ./mongoinit.js:/docker-entrypoint-mongoinit.d
+  web:
+    image: nginx:latest
+    build:
+       context: C:/Users/ivana/Documents/Misproyectos/RageGame
+       dockerfile: dockerfile
+    ports:
+      - 8080:5173
+    container_name: onlycatsweb
+    volumes: 
+      - C:/Users/ivana/Documents/Misproyectos/RageGame/onlycatsfrontend/dist:/usr/share/nginx/html
+    depends_on:
+      - gateway
 networks:
   onlycats-network:
     driver: bridge
