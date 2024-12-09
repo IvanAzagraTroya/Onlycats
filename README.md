@@ -103,10 +103,6 @@ Esto levanta todos los contenedores que componen el proyecto
 
 [Documentation](https://linktodocumentation)
 
-## Photos
-![post1](public/vite.svg)
-
-
 ## Authors
 
 - [Iván Azagra Troya](https://github.com/IvanAzagraTroya)
